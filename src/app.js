@@ -1,0 +1,109 @@
+require('dotenv').config();
+const express = require('express');
+const cors = require('cors');
+const helmet = require('helmet');
+const compression = require('compression');
+const rateLimit = require('express-rate-limit');
+const morgan = require('morgan');
+const { createServer } = require('http');
+const { Server } = require('socket.io');
+const path = require('path');
+const { setupDatabase } = require('./config/database');
+const { setupLogger } = require('./utils/logger');
+const morganStream = require('./utils/morganStream');
+const authRoutes = require('./routes/auth');
+const inventoryRoutes = require('./routes/inventory');
+const transportRoutes = require('./routes/transport');
+const logsRoutes = require('./routes/logs');
+
+const app = express();
+const httpServer = createServer(app);
+const io = new Server(httpServer);
+
+// Setup logger with Socket.IO
+const logger = setupLogger(io);
+
+// View engine setup
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
+// Security middleware
+app.use(helmet({
+    contentSecurityPolicy: {
+        directives: {
+            ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+            "script-src": ["'self'", "'unsafe-inline'", "cdn.jsdelivr.net"],
+            "style-src": ["'self'", "'unsafe-inline'", "cdn.jsdelivr.net"],
+            "img-src": ["'self'", "data:", "cdn.jsdelivr.net"],
+            "connect-src": ["'self'", "ws:", "wss:"]
+        }
+    }
+}));
+app.use(cors());
+app.use(express.json());
+app.use(compression());
+
+// Morgan logging middleware with custom format
+morgan.token('body', (req) => JSON.stringify(req.body));
+morgan.token('query', (req) => JSON.stringify(req.query));
+morgan.token('user', (req) => req.user?.username || req.user?.employeeID || 'anonymous');
+
+const morganFormat = ':remote-addr - :user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent" :response-time ms :query :body';
+
+app.use(morgan(morganFormat, {
+    stream: morganStream,
+    skip: (req) => req.path === '/health' // Skip logging for health check endpoints
+}));
+
+// Rate limiting
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100 // limit each IP to 100 requests per windowMs
+});
+app.use(limiter);
+
+// Routes
+app.use('/api/auth', authRoutes);
+app.use('/api/inventory', inventoryRoutes);
+app.use('/api/transport', transportRoutes);
+app.use('/logs', logsRoutes);
+
+// Health check endpoint
+app.get('/health', (req, res) => {
+    res.status(200).json({ status: 'ok' });
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+    logger.error(err.stack);
+    res.status(500).json({
+        error: 'Internal Server Error',
+        message: process.env.NODE_ENV === 'development' ? err.message : undefined
+    });
+});
+
+// Socket.IO connection handling
+io.on('connection', (socket) => {
+    logger.info(`Client connected: ${socket.id}`);
+    
+    socket.on('disconnect', () => {
+        logger.info(`Client disconnected: ${socket.id}`);
+    });
+});
+
+// Database connection and server start
+const PORT = process.env.PORT || 3000;
+
+async function startServer() {
+    try {
+        await setupDatabase();
+        httpServer.listen(PORT, () => {
+            logger.info(`Server is running on port ${PORT}`);
+        });
+    } catch (error) {
+        logger.error('Failed to start server:', error);
+        process.exit(1);
+    }
+}
+
+startServer(); 
