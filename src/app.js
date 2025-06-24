@@ -14,7 +14,9 @@ const morganStream = require('./utils/morganStream');
 const authRoutes = require('./routes/auth');
 const inventoryRoutes = require('./routes/inventory');
 const transportRoutes = require('./routes/transport');
+const reportTmsRoutes = require('./routes/reportTms');
 const logsRoutes = require('./routes/logs');
+const cacheRoutes = require('./routes/cache');
 
 const app = express();
 const httpServer = createServer(app);
@@ -66,6 +68,8 @@ app.use(limiter);
 app.use('/api/auth', authRoutes);
 app.use('/api/inventory', inventoryRoutes);
 app.use('/api/transport', transportRoutes);
+app.use('/api/report-tms', reportTmsRoutes);
+app.use('/api/cache', cacheRoutes);
 app.use('/logs', logsRoutes);
 
 // Health check endpoint

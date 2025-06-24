@@ -40,8 +40,30 @@ async function getCachedData(key, fetchData, ttl = null) {
   }
 }
 
+/**
+ * Clear cache keys based on a prefix.
+ * @param {string} prefix - The prefix to match for cache keys to be deleted.
+ * @returns {number} The number of keys that were deleted.
+ */
+function clearCacheByPrefix(prefix) {
+  const keys = cache.keys();
+  let deletedCount = 0;
+  
+  for (const key of keys) {
+    if (key.startsWith(prefix)) {
+      cache.del(key);
+      deletedCount++;
+      logger.debug(`Cache key deleted: ${key}`);
+    }
+  }
+
+  logger.info(`Cleared ${deletedCount} cache keys with prefix: ${prefix}`);
+  return deletedCount;
+}
+
 module.exports = {
   cache,
   getCacheKey,
-  getCachedData
+  getCachedData,
+  clearCacheByPrefix
 }; 
