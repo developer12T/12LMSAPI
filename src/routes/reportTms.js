@@ -1,9 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { executeStoredProcedure } = require('../config/database');
 const { authMiddleware } = require('../middleware/ldapAuth');
 const { setupLogger } = require('../utils/logger');
-const {
+const { 
   getDailyStockData,
   getDailyStockHeadData,
   getDailyStockLineData

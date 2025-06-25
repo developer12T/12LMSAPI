@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const { executeStoredProcedure } = require('../config/database');
 const { authMiddleware } = require('../middleware/ldapAuth');
 const { getCacheKey, getCachedData } = require('../utils/cache');
 const { setupLogger } = require('../utils/logger');
@@ -10,7 +9,8 @@ const {
   getPODetailsData,
   getGeneralTransportData,
   getReasonsData,
-  updateBacklog
+  updateBacklog,
+  getGenBackOrderData
 } = require('../controllers/transportController');
 const {
   formatErrorResponse,
@@ -115,6 +115,26 @@ router.post('/backlog/update', createRouteHandler(updateBacklog, {
   extractMetadata: (params) => ({
     po_no: params.po_no,
     usermodify: params.usermodify
+  })
+}));
+
+// GET /api/transport/gen-back-order - Get Gen_back_order data with query parameters
+router.get('/gen-back-order', createRouteHandler(getGenBackOrderData, {
+  stringParams: [],
+  extractMetadata: (params) => ({
+    hcase: 'getdata_bl',
+    p1: '',
+    p2: ''
+  })
+}));
+
+// POST /api/transport/gen-back-order - Get Gen_back_order data with body parameters
+router.post('/gen-back-order', createRouteHandler(getGenBackOrderData, {
+  stringParams: [],
+  extractMetadata: (params) => ({
+    hcase: 'getdata_bl',
+    p1: '',
+    p2: ''
   })
 }));
 

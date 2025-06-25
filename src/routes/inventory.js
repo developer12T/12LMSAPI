@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { executeStoredProcedure } = require('../config/database');
+const { exec } = require('../config/sequelize');
 const { authMiddleware } = require('../middleware/ldapAuth');
 const { getCacheKey, getCachedData } = require('../utils/cache');
 const { setupLogger } = require('../utils/logger');
@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
       cacheKey,
       async () => {
         logger.info('Fetching inventory data from database');
-        return await executeStoredProcedure('SP_GetInventory', req.query);
+        return await exec('SP_GetInventory', req.query);
       }
     );
 
@@ -36,7 +36,7 @@ router.get('/', async (req, res) => {
 // Example: POST for updating inventory
 router.post('/update', async (req, res) => {
   try {
-    const result = await executeStoredProcedure('SP_UpdateInventory', req.body);
+    const result = await exec('SP_UpdateInventory', req.body);
     res.json(result);
   } catch (error) {
     logger.error('Error updating inventory:', error);

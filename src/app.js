@@ -8,7 +8,7 @@ const morgan = require('morgan');
 const { createServer } = require('http');
 const { Server } = require('socket.io');
 const path = require('path');
-const { setupDatabase } = require('./config/database');
+const { testConnection } = require('./config/sequelize');
 const { setupLogger } = require('./utils/logger');
 const morganStream = require('./utils/morganStream');
 const authRoutes = require('./routes/auth');
@@ -100,7 +100,7 @@ const PORT = process.env.PORT || 3000;
 
 async function startServer() {
     try {
-        await setupDatabase();
+        await testConnection();
         httpServer.listen(PORT, () => {
             logger.info(`Server is running on port ${PORT}`);
         });
