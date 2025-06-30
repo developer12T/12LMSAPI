@@ -10,7 +10,13 @@ const {
   getGeneralTransportData,
   getReasonsData,
   updateBacklog,
-  getGenBackOrderData
+  getGenBackOrderData,
+  getTransportCostWarehouseData,
+  getTransportCostRouteData,
+  getTransportCostData,
+  getTransportCostTableData,
+  getTransportCostShipmentData,
+  getTransportCostShipmentEdit
 } = require('../controllers/transportController');
 const {
   formatErrorResponse,
@@ -244,6 +250,149 @@ router.post('/', createRouteHandler(getGeneralTransportData, {
     p8: params.p8,
     p9: params.p9,
     p10: params.p10
+  })
+}));
+
+// ============================================================================
+// TRANSPORT COST ENDPOINTS
+// ============================================================================
+
+// Step 1: Get warehouse list for transport cost
+// GET /api/transport/cost/warehouses - Get warehouse data for transport cost
+router.get('/cost/warehouses', createRouteHandler(getTransportCostWarehouseData));
+
+// Step 2: Get route list based on selected warehouse
+// GET /api/transport/cost/routes - Get route data for transport cost
+router.get('/cost/routes', createRouteHandler(getTransportCostRouteData, {
+  requiredParams: ['who_no'],
+  stringParams: ['who_no'],
+  extractMetadata: (params) => ({
+    who_no: params.who_no
+  })
+}));
+
+// Step 2: Get route list based on selected warehouse (POST method)
+// POST /api/transport/cost/routes - Get route data for transport cost with body parameters
+router.post('/cost/routes', createRouteHandler(getTransportCostRouteData, {
+  requiredParams: ['who_no'],
+  stringParams: ['who_no'],
+  extractMetadata: (params) => ({
+    who_no: params.who_no
+  })
+}));
+
+// Step 3: Get transport cost data based on selected warehouse and route
+// GET /api/transport/cost/data - Get transport cost data
+router.get('/cost/data', createRouteHandler(getTransportCostData, {
+  stringParams: ['who_no', 'begin_no', 'end_no', 'route_no', 'p5', 'p6', 'p7'],
+  extractMetadata: (params) => ({
+    who_no: params.who_no || '',
+    begin_no: params.begin_no || '',
+    end_no: params.end_no || '',
+    route_no: params.route_no || '',
+    p5: params.p5 || '',
+    p6: params.p6 || '',
+    p7: params.p7 || ''
+  })
+}));
+
+// Step 3: Get transport cost data based on selected warehouse and route (POST method)
+// POST /api/transport/cost/data - Get transport cost data with body parameters
+router.post('/cost/data', createRouteHandler(getTransportCostData, {
+  stringParams: ['who_no', 'begin_no', 'end_no', 'route_no', 'p5', 'p6', 'p7'],
+  extractMetadata: (params) => ({
+    who_no: params.who_no || '',
+    begin_no: params.begin_no || '',
+    end_no: params.end_no || '',
+    route_no: params.route_no || '',
+    p5: params.p5 || '',
+    p6: params.p6 || '',
+    p7: params.p7 || ''
+  })
+}));
+
+// ============================================================================
+// TRANSPORT COST TABLE ENDPOINTS (แยกต่างหากสำหรับแสดงผลตาราง)
+// ============================================================================
+
+// GET /api/transport/cost-table - Get transport cost table data
+router.get('/cost-table', createRouteHandler(getTransportCostTableData, {
+  stringParams: ['who_no', 'begin_no', 'end_no', 'route_no', 'p5', 'p6', 'p7'],
+  extractMetadata: (params) => ({
+    who_no: params.who_no || '',
+    begin_no: params.begin_no || '',
+    end_no: params.end_no || '',
+    route_no: params.route_no || '',
+    p5: params.p5 || '',
+    p6: params.p6 || '',
+    p7: params.p7 || ''
+  })
+}));
+
+// POST /api/transport/cost-table - Get transport cost table data with body parameters
+router.post('/cost-table', createRouteHandler(getTransportCostTableData, {
+  stringParams: ['who_no', 'begin_no', 'end_no', 'route_no', 'p5', 'p6', 'p7'],
+  extractMetadata: (params) => ({
+    who_no: params.who_no || '',
+    begin_no: params.begin_no || '',
+    end_no: params.end_no || '',
+    route_no: params.route_no || '',
+    p5: params.p5 || '',
+    p6: params.p6 || '',
+    p7: params.p7 || ''
+  })
+}));
+
+// GET /api/transport/cost-table/:id - Get transport cost shipment data by ID
+router.get('/cost-table/:id', createRouteHandler(getTransportCostShipmentData, {
+  stringParams: ['who_no', 'begin_no', 'end_no', 'route_no', 'shipment_no', 'cal_id1', 'cal_id2', 'cal_id3', 'p6', 'p7'],
+  extractMetadata: (params) => ({
+    id: params.id,
+    who_no: params.who_no || '',
+    begin_no: params.begin_no || '',
+    end_no: params.end_no || '',
+    route_no: params.route_no || '',
+    shipment_no: params.shipment_no || '',
+    cal_id1: params.cal_id1 || '0',
+    cal_id2: params.cal_id2 || '0',
+    cal_id3: params.cal_id3 || '0',
+    p6: params.p6 || '',
+    p7: params.p7 || ''
+  })
+}));
+
+// POST /api/transport/cost-table/:id - Get transport cost shipment data by ID with body parameters
+router.post('/cost-table/:id', createRouteHandler(getTransportCostShipmentData, {
+  stringParams: ['who_no', 'begin_no', 'end_no', 'route_no', 'shipment_no', 'cal_id1', 'cal_id2', 'cal_id3', 'p6', 'p7'],
+  extractMetadata: (params) => ({
+    id: params.id,
+    who_no: params.who_no || '',
+    begin_no: params.begin_no || '',
+    end_no: params.end_no || '',
+    route_no: params.route_no || '',
+    shipment_no: params.shipment_no || '',
+    cal_id1: params.cal_id1 || '0',
+    cal_id2: params.cal_id2 || '0',
+    cal_id3: params.cal_id3 || '0',
+    p6: params.p6 || '',
+    p7: params.p7 || ''
+  })
+}));
+
+// GET /api/transport/cost-edit - Get transport cost shipment edit data
+router.get('/cost-edit', createRouteHandler(getTransportCostShipmentEdit, {
+  stringParams: ['who_no', 'begin_no', 'end_no', 'route_no', 'shipment_no', 'cal_id1', 'cal_id2', 'cal_id3', 'type_no', 'helpper'],
+  extractMetadata: (params) => ({
+    who_no: params.who_no || '',
+    begin_no: params.begin_no || '',
+    end_no: params.end_no || '',
+    route_no: params.route_no || '',
+    shipment_no: params.shipment_no || '',
+    cal_id1: params.cal_id1 || '0',
+    cal_id2: params.cal_id2 || '0',
+    cal_id3: params.cal_id3 || '0',
+    type_no: params.type_no || '1',
+    helpper: params.helpper || '0'
   })
 }));
 

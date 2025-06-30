@@ -48,6 +48,10 @@ async function exec(procedureName, params = {}) {
     });
     
     logger.info(`SQL: ${sql}`);
+    logger.info(`Replacements:`, replacements);
+    
+    // ตรวจสอบการเชื่อมต่อฐานข้อมูล
+    await sequelize.authenticate();
     
     const results = await sequelize.query(sql, {
       replacements: replacements,
@@ -55,10 +59,27 @@ async function exec(procedureName, params = {}) {
     });
     
     logger.info(`Success: ${procedureName}, Results: ${Array.isArray(results) ? results.length : 0}`);
+    logger.info(`Results type: ${typeof results}`);
+    logger.info(`Results:`, results);
     return results || [];
   } catch (error) {
-    logger.error(`Error: ${procedureName}`, error.message);
-    throw error;
+    logger.error(`Error: ${procedureName}`, {
+      message: error.message,
+      code: error.code,
+      state: error.state,
+      class: error.class,
+      lineNumber: error.lineNumber,
+      serverName: error.serverName,
+      procName: error.procName,
+      stack: error.stack
+    });
+    
+    // ส่งกลับ error ที่มีรายละเอียดมากขึ้น
+    const enhancedError = new Error(`Database error in ${procedureName}: ${error.message}`);
+    enhancedError.originalError = error;
+    enhancedError.procedureName = procedureName;
+    enhancedError.params = params;
+    throw enhancedError;
   }
 }
 

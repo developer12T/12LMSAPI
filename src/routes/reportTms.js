@@ -2,10 +2,15 @@ const express = require('express');
 const router = express.Router();
 const { authMiddleware } = require('../middleware/ldapAuth');
 const { setupLogger } = require('../utils/logger');
-const { 
+const {
   getDailyStockData,
   getDailyStockHeadData,
-  getDailyStockLineData
+  getDailyStockLineData,
+  getNoBillData,
+  getNoBillSummaryData,
+  getTransportCostDataOption,
+  getTransportCostShowData,
+  getWharehouse
 } = require('../controllers/reportTmsController');
 const {
   formatErrorResponse,
@@ -138,6 +143,129 @@ router.post('/daily-stock/line', createRouteHandler(getDailyStockLineData, {
     p1: params.p1,
     p2: params.p2,
     p3: params.p3
+  })
+}));
+
+// ============================================================================
+// NO BILL ENDPOINTS
+// ============================================================================
+
+// GET /api/report-tms/nobill - Get no bill data with query parameters
+router.get('/nobill', createRouteHandler(getNoBillData, {
+  requiredParams: ['warehouse', 'dateStart', 'dateEnd'],
+  stringParams: ['hcase', 'warehouse', 'dateStart', 'dateEnd'],
+  extractMetadata: (params) => ({
+    hcase: params.hcase || 'getdata_nobill',
+    warehouse: params.warehouse,
+    dateStart: params.dateStart,
+    dateEnd: params.dateEnd
+  })
+}));
+
+router.get('/nobill-wh', createRouteHandler(getWharehouse, {
+  extractMetadata: (params) => ({
+    hcase: params.hcase || 'show_wh',
+    p1: '',
+    p2: '',
+    p3: ''
+  })
+}));
+
+// POST /api/report-tms/nobill - Get no bill data with body parameters
+router.post('/nobill', createRouteHandler(getNoBillData, {
+  requiredParams: ['warehouse', 'dateStart', 'dateEnd'],
+  stringParams: ['hcase', 'warehouse', 'dateStart', 'dateEnd'],
+  extractMetadata: (params) => ({
+    hcase: params.hcase || 'getdata_nobill',
+    warehouse: params.warehouse,
+    dateStart: params.dateStart,
+    dateEnd: params.dateEnd
+  })
+}));
+
+// GET /api/report-tms/nobill/summary - Get no bill summary data with query parameters
+router.get('/nobill/summary', createRouteHandler(getNoBillSummaryData, {
+  requiredParams: ['warehouse', 'dateStart', 'dateEnd'],
+  stringParams: ['hcase', 'warehouse', 'dateStart', 'dateEnd'],
+  extractMetadata: (params) => ({
+    hcase: params.hcase || 'getsummary_nobill',
+    warehouse: params.warehouse,
+    dateStart: params.dateStart,
+    dateEnd: params.dateEnd
+  })
+}));
+
+// POST /api/report-tms/nobill/summary - Get no bill summary data with body parameters
+router.post('/nobill/summary', createRouteHandler(getNoBillSummaryData, {
+  requiredParams: ['warehouse', 'dateStart', 'dateEnd'],
+  stringParams: ['hcase', 'warehouse', 'dateStart', 'dateEnd'],
+  extractMetadata: (params) => ({
+    hcase: params.hcase || 'getsummary_nobill',
+    warehouse: params.warehouse,
+    dateStart: params.dateStart,
+    dateEnd: params.dateEnd
+  })
+}));
+
+// ============================================================================
+// TRANSPORT COST ENDPOINTS
+// ============================================================================
+
+// GET /api/report-tms/transport-cost - Get transport cost data with query parameters
+router.get('/transport-cost', createRouteHandler(getTransportCostDataOption, {
+  stringParams: ['p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7', 'p8'],
+  extractMetadata: (params) => ({
+    p1: params.p1 || '',
+    p2: params.p2 || '',
+    p3: params.p3 || '',
+    p4: params.p4 || '',
+    p5: params.p5 || '',
+    p6: params.p6 || '',
+    p7: params.p7 || '',
+    p8: params.p8 || ''
+  })
+}));
+
+// POST /api/report-tms/transport-cost - Get transport cost data with body parameters
+router.post('/transport-cost', createRouteHandler(getTransportCostDataOption, {
+  stringParams: ['p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7', 'p8'],
+  extractMetadata: (params) => ({
+    p1: params.p1 || '',
+    p2: params.p2 || '',
+    p3: params.p3 || '',
+    p4: params.p4 || '',
+    p5: params.p5 || '',
+    p6: params.p6 || '',
+    p7: params.p7 || '',
+    p8: params.p8 || ''
+  })
+}));
+
+// GET /api/report-tms/transport-cost/show-data - Get transport cost show data with query parameters
+router.get('/transport-cost/show-data', createRouteHandler(getTransportCostShowData, {
+  stringParams: ['shipmentId', 'channelId', 'truckId', 'p4', 'p5', 'p6', 'p7'],
+  extractMetadata: (params) => ({
+    shipmentId: params.shipmentId || '',
+    channelId: params.channelId || '',
+    truckId: params.truckId || '',
+    p4: params.p4 || '',
+    p5: params.p5 || '',
+    p6: params.p6 || '',
+    p7: params.p7 || ''
+  })
+}));
+
+// POST /api/report-tms/transport-cost/show-data - Get transport cost show data with body parameters
+router.post('/transport-cost/show-data', createRouteHandler(getTransportCostShowData, {
+  stringParams: ['shipmentId', 'channelId', 'truckId', 'p4', 'p5', 'p6', 'p7'],
+  extractMetadata: (params) => ({
+    shipmentId: params.shipmentId || '',
+    channelId: params.channelId || '',
+    truckId: params.truckId || '',
+    p4: params.p4 || '',
+    p5: params.p5 || '',
+    p6: params.p6 || '',
+    p7: params.p7 || ''
   })
 }));
 

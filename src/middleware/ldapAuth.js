@@ -96,19 +96,6 @@ async function authenticateLDAP(username, password) {
   return new Promise(async (resolve, reject) => {
     logger.info('เริ่มการตรวจสอบ LDAP สำหรับผู้ใช้:', username);
     
-    try {
-      // ขั้นตอนที่ 1: ตรวจสอบ password expiration ก่อน
-      const expirationCheck = await checkPasswordExpiration(username);
-      if (expirationCheck.isExpired) {
-        logger.info('ตรวจพบรหัสผ่านหมดอายุจากการตรวจสอบ attributes');
-        reject(new Error('PASSWORD_EXPIRED'));
-        return;
-      }
-    } catch (error) {
-      logger.warn('ไม่สามารถตรวจสอบ password expiration ได้:', error.message);
-      // ยังคงดำเนินการต่อแม้จะตรวจสอบไม่ได้
-    }
-    
     // สร้างการเชื่อมต่อ LDAP
     const client = ldap.createClient({
       url: process.env.LDAP_URL,
@@ -119,7 +106,7 @@ async function authenticateLDAP(username, password) {
     // เพิ่ม event handlers สำหรับการดูข้อผิดพลาด
     client.on('error', (err) => {
       logger.error('LDAP client error:', err);
-    });
+    }); 
     
     client.on('connectError', (err) => {
       logger.error('LDAP connection error:', err);
@@ -144,7 +131,7 @@ async function authenticateLDAP(username, password) {
         filter: userFilter,
         scope: 'sub',
         attributes: ['employeeID','sAMAccountName','givenName','sn','displayName','description','mail','userPrincipalName','title','department','company','distinguishedName']
-      };
+      }; 
 
       client.search(LDAP_BASE_DN, opts, (searchErr, res) => {
         if (searchErr) {
@@ -175,6 +162,8 @@ async function authenticateLDAP(username, password) {
             reject(new Error('ไม่พบผู้ใช้ในระบบ'));
             return;
           }
+
+          // logger.info('พบผู้ใช้:', userDN);
  
           // ตรวจสอบรหัสผ่านด้วย DN ที่พบ
           verifyPassword(client, userDN, password, entries, resolve, reject);
@@ -187,7 +176,7 @@ async function authenticateLDAP(username, password) {
 // แยกฟังก์ชันตรวจสอบรหัสผ่านออกมา
 function verifyPassword(client, userDN, password, entries, resolve, reject) {
   logger.info('กำลังตรวจสอบรหัสผ่านสำหรับ DN:', userDN);
-  
+   
   // ปิดการเชื่อมต่อเก่าก่อนทำการ bind ใหม่
   client.unbind((unbindErr) => {
     if (unbindErr) {
@@ -205,81 +194,9 @@ function verifyPassword(client, userDN, password, entries, resolve, reject) {
     newClient.bind(userDN, password, (userBindErr) => {
       if (userBindErr) {
         logger.error('รหัสผ่านไม่ถูกต้อง:', userBindErr);
-        logger.error('Full LDAP Error Object:', JSON.stringify(userBindErr, null, 2));
-        logger.error('Error Code:', userBindErr.code);
-        logger.error('Error Name:', userBindErr.name);
-        logger.error('Error Message:', userBindErr.message);
-        logger.error('Error Description:', userBindErr.description);
-        logger.error('Error DN:', userBindErr.dn);
-        logger.error('Error Stack:', userBindErr.stack);
         
         newClient.unbind();
-        
-        // ตรวจสอบว่าเป็นรหัสผ่านหมดอายุหรือไม่
-        const errorMessage = (userBindErr.message || '').toLowerCase();
-        const errorCode = userBindErr.code;
-        const errorName = (userBindErr.name || '').toLowerCase();
-        const errorDescription = (userBindErr.description || '').toLowerCase();
-        
-        logger.info('LDAP Error Code:', errorCode);
-        logger.info('LDAP Error Name:', errorName);
-        logger.info('LDAP Error Message:', errorMessage);
-        logger.info('LDAP Error Description:', errorDescription);
-        
-        // ตรวจสอบ error codes และ messages ที่เกี่ยวข้องกับรหัสผ่านหมดอายุ
-        const isPasswordExpired = 
-          // Error code 49 (Invalid credentials) + specific messages
-          (errorCode === 49 && (
-            errorMessage.includes('password expired') ||
-            errorMessage.includes('password must change') ||
-            errorMessage.includes('password change required') ||
-            errorMessage.includes('password has expired') ||
-            errorMessage.includes('password is expired') ||
-            errorMessage.includes('password policy') ||
-            errorMessage.includes('password not acceptable') ||
-            errorMessage.includes('password too old') ||
-            errorMessage.includes('password age') ||
-            errorMessage.includes('password history') ||
-            errorMessage.includes('password complexity') ||
-            errorMessage.includes('password minimum age') ||
-            errorMessage.includes('password maximum age') ||
-            errorDescription.includes('password expired') ||
-            errorDescription.includes('password must change') ||
-            errorDescription.includes('password change required') ||
-            errorDescription.includes('password has expired') ||
-            errorDescription.includes('password is expired') ||
-            errorDescription.includes('password policy') ||
-            errorDescription.includes('password not acceptable') ||
-            errorDescription.includes('password too old') ||
-            errorDescription.includes('password age') ||
-            errorDescription.includes('password history') ||
-            errorDescription.includes('password complexity') ||
-            errorDescription.includes('password minimum age') ||
-            errorDescription.includes('password maximum age')
-          )) ||
-          // Error code 53 (Unwilling to perform) - บางครั้งใช้สำหรับ password policy
-          (errorCode === 53 && (errorMessage.includes('password') || errorDescription.includes('password'))) ||
-          // Error code 19 (Constraint violation) - บางครั้งใช้สำหรับ password policy
-          (errorCode === 19 && (errorMessage.includes('password') || errorDescription.includes('password'))) ||
-          // Error code 52 (Unavailable) - บางครั้งใช้สำหรับ password policy
-          (errorCode === 52 && (errorMessage.includes('password') || errorDescription.includes('password'))) ||
-          // Error code 8 (Strong authentication required) - บางครั้งใช้สำหรับ password policy
-          (errorCode === 8 && (errorMessage.includes('password') || errorDescription.includes('password')));
-        
-        if (isPasswordExpired) {
-          logger.info('ตรวจพบรหัสผ่านหมดอายุ');
-          reject(new Error('PASSWORD_EXPIRED'));
-        } else {
-          // สำหรับการทดสอบ: ถ้า error code เป็น 49 และมีข้อมูล error object ที่ซับซ้อน
-          // อาจเป็น password expiration ได้
-          if (errorCode === 49 && Object.keys(userBindErr).length > 3) {
-            logger.info('อาจเป็นรหัสผ่านหมดอายุ (error code 49 with complex error object)');
-            logger.info('Error object keys:', Object.keys(userBindErr));
-            reject(new Error('PASSWORD_EXPIRED'));
-          } else {
-            reject(new Error('รหัสผ่านไม่ถูกต้อง'));
-          }
-        }
+        reject(new Error('รหัสผ่านไม่ถูกต้อง'));
         return;
       }
 
@@ -1310,6 +1227,7 @@ async function changeExpiredPasswordWithExtOp(username, currentPassword, newPass
             }
 
             logger.info('เปลี่ยนรหัสผ่านสำเร็จด้วย Extended Operation');
+            client.unbind();
             resolve({ success: true, message: 'เปลี่ยนรหัสผ่านสำเร็จ' });
           });
         });
