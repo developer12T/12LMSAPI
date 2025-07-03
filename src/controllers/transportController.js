@@ -457,6 +457,32 @@ const getTransportCostShipmentEdit = async (params) => {
   };
 };
 
+/**
+ * Get transport cost rates data (No Caching)
+ * API for getting cost rates for dropdown selection
+ * @param {Object} params - Request parameters
+ * @param {string} params.selected_value - Currently selected value for comparison
+ * @returns {Promise<Array>} Cost rates data
+ */
+const getTransportCostRates = async (params) => {
+  const { selected_value = '' } = params;
+
+  logger.info('Executing page_TransCost for cost rates data', { selected_value });
+  
+  const result = await exec('page_TransCost', {
+    hcase: 'cost_rate',
+    p1: '', p2: '', p3: '', p4: '', p5: '', p6: '', p7: ''
+  });
+
+  // Add selected flag to each item
+  const processedData = (result || []).map(item => ({
+    ...item,
+    selected: item.FORCOST === selected_value
+  }));
+
+  return processedData;
+};
+
 module.exports = {
   getBacklogData,
   getWarehouseData,
@@ -470,5 +496,6 @@ module.exports = {
   getTransportCostData,
   getTransportCostTableData,
   getTransportCostShipmentData,
-  getTransportCostShipmentEdit
+  getTransportCostShipmentEdit,
+  getTransportCostRates
 }; 

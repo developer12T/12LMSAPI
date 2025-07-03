@@ -16,7 +16,8 @@ const {
   getTransportCostData,
   getTransportCostTableData,
   getTransportCostShipmentData,
-  getTransportCostShipmentEdit
+  getTransportCostShipmentEdit,
+  getTransportCostRates
 } = require('../controllers/transportController');
 const {
   formatErrorResponse,
@@ -393,6 +394,14 @@ router.get('/cost-edit', createRouteHandler(getTransportCostShipmentEdit, {
     cal_id3: params.cal_id3 || '0',
     type_no: params.type_no || '1',
     helpper: params.helpper || '0'
+  })
+}));
+
+// GET /api/transport/cost-rates - Get transport cost rates for dropdown
+router.get('/cost-rates', createRouteHandler(getTransportCostRates, {
+  stringParams: ['selected_value'],
+  extractMetadata: (params) => ({
+    selected_value: params.selected_value || ''
   })
 }));
 
