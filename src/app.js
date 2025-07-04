@@ -17,6 +17,7 @@ const transportRoutes = require('./routes/transport');
 const reportTmsRoutes = require('./routes/reportTms');
 const logsRoutes = require('./routes/logs');
 const cacheRoutes = require('./routes/cache');
+const userRoutes = require('./routes/user');
 
 const app = express();
 const httpServer = createServer(app);
@@ -60,7 +61,7 @@ app.use(morgan(morganFormat, {
 // Rate limiting
 const limiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 100 // limit each IP to 100 requests per windowMs
+    max: 1000 // limit each IP to 100 requests per windowMs
 });
 app.use(limiter);
 
@@ -70,6 +71,7 @@ app.use('/api/inventory', inventoryRoutes);
 app.use('/api/transport', transportRoutes);
 app.use('/api/report-tms', reportTmsRoutes);
 app.use('/api/cache', cacheRoutes);
+app.use('/api/user', userRoutes);
 app.use('/logs', logsRoutes);
 
 // Health check endpoint
