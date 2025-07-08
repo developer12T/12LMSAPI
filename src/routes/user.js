@@ -15,7 +15,7 @@ const logger = setupLogger();
 router.get('/', async (req, res) => {
     try {
         logger.info('Fetching users from external chat API');
-
+        
         const response = await axios.get('http://apps.onetwotrading.co.th/12chat/api/users', {
             timeout: 10000, // 10 second timeout
             headers: {
@@ -23,7 +23,7 @@ router.get('/', async (req, res) => {
                 'User-Agent': '12LMSAPI/1.0.0'
             }
         });
-
+        
         logger.info('Successfully fetched users from external API');
 
         // ตรวจสอบ response format และจัดการข้อมูล
@@ -95,9 +95,9 @@ router.get('/', async (req, res) => {
                         hasAccess: currentUser ? currentUser.isActive === 1 : true
                     });
                 }
-
-                res.json({
-                    success: true,
+        
+        res.json({
+            success: true,
                     data: formattedUsers
                 });
 
@@ -134,10 +134,10 @@ router.get('/', async (req, res) => {
                 data: externalData.data || []
             });
         }
-
+        
     } catch (error) {
         logger.error('Error fetching users from external API:', error.message);
-
+        
         if (error.response) {
             // The request was made and the server responded with a status code
             // that falls out of the range of 2xx

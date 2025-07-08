@@ -69,7 +69,7 @@ function transformEntryFormat(entries) {
       fullName: tempEntry.fullName ?? null,
       fullNameThai: tempEntry.fullNameThai ?? null,
       mail: tempEntry.mail ?? null,
-      imgUrl: `http://58.181.206.156:8080/12Trading/HR/assets/imgs/employee_picture/${tempEntry.employeeID}.jpg`,
+      imgUrl: `https://main.onetwotrading.co.th/12Trading/HR/assets/imgs/employee_picture/${tempEntry.employeeID}.jpg`,
       position: tempEntry.title ?? null,
       department: tempEntry.department ?? null,
       company: tempEntry.company ?? null,
