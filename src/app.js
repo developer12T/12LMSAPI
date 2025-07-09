@@ -11,6 +11,7 @@ const path = require('path');
 const { testConnection } = require('./config/sequelize');
 const { setupLogger } = require('./utils/logger');
 const morganStream = require('./utils/morganStream');
+const apiLogger = require('./middleware/apiLogger');
 const authRoutes = require('./routes/auth');
 const inventoryRoutes = require('./routes/inventory');
 const transportRoutes = require('./routes/transport');
@@ -18,6 +19,7 @@ const reportTmsRoutes = require('./routes/reportTms');
 const logsRoutes = require('./routes/logs');
 const cacheRoutes = require('./routes/cache');
 const userRoutes = require('./routes/user');
+const apiLogsRoutes = require('./routes/apiLogs');
 
 const app = express();
 const httpServer = createServer(app);
@@ -46,6 +48,9 @@ app.use(cors());
 app.use(express.json());
 app.use(compression());
 
+// API Logger middleware - must be before routes
+app.use(apiLogger.logApiCall.bind(apiLogger));
+
 // Morgan logging middleware with custom format
 morgan.token('body', (req) => JSON.stringify(req.body));
 morgan.token('query', (req) => JSON.stringify(req.query));
@@ -72,7 +77,13 @@ app.use('/api/transport', transportRoutes);
 app.use('/api/report-tms', reportTmsRoutes);
 app.use('/api/cache', cacheRoutes);
 app.use('/api/user', userRoutes);
+app.use('/api/logs', apiLogsRoutes);
 app.use('/logs', logsRoutes);
+
+// API Logs Dashboard
+app.get('/api-dashboard', (req, res) => {
+    res.render('apiLogs');
+});
 
 // Health check endpoint
 app.get('/health', (req, res) => {

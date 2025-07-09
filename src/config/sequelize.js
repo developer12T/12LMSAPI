@@ -60,7 +60,7 @@ async function exec(procedureName, params = {}) {
     
     logger.info(`Success: ${procedureName}, Results: ${Array.isArray(results) ? results.length : 0}`);
     logger.info(`Results type: ${typeof results}`);
-    logger.info(`Results:`, results);
+    logger.info(`Results:`, results.length);
     return results || [];
   } catch (error) {
     logger.error(`Error: ${procedureName}`, {

@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Logs Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        .card {
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+            border: 1px solid rgba(0, 0, 0, 0.125);
+        }
+        .table-responsive {
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        .status-2xx { color: #198754; }
+        .status-4xx { color: #dc3545; }
+        .status-5xx { color: #fd7e14; }
+        .slow-call { background-color: #fff3cd; }
+        .very-slow-call { background-color: #f8d7da; }
+        .nav-tabs .nav-link.active {
+            background-color: #f8f9fa;
+            border-color: #dee2e6 #dee2e6 #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="mt-4 mb-4">
+                    <i class="bi bi-activity"></i> API Logs Dashboard
+                </h1>
+            </div>
+        </div>
+
+        <!-- Statistics Cards -->
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Total API Calls</h5>
+                        <h2 id="totalCalls">-</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Average Response Time</h5>
+                        <h2 id="avgResponseTime">-</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Today's Calls</h5>
+                        <h2 id="todayCalls">-</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Slow Calls (>1s)</h5>
+                        <h2 id="slowCalls">-</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <ul class="nav nav-tabs" id="logTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="recent-tab" data-bs-toggle="tab" data-bs-target="#recent" type="button" role="tab">
+                    <i class="bi bi-clock"></i> Recent Calls
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="by-employee-tab" data-bs-toggle="tab" data-bs-target="#by-employee" type="button" role="tab">
+                    <i class="bi bi-person"></i> By Employee
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="by-date-tab" data-bs-toggle="tab" data-bs-target="#by-date" type="button" role="tab">
+                    <i class="bi bi-calendar"></i> By Date
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="slow-calls-tab" data-bs-toggle="tab" data-bs-target="#slow-calls" type="button" role="tab">
+                    <i class="bi bi-exclamation-triangle"></i> Slow Calls
+                </button>
+            </li>
+        </ul>
+
+        <!-- Tab Content -->
+        <div class="tab-content" id="logTabsContent">
+            <!-- Recent Calls Tab -->
+            <div class="tab-pane fade show active" id="recent" role="tabpanel">
+                <div class="card mt-3">
+                    <div class="card-header">
+                        <h5><i class="bi bi-clock"></i> Recent API Calls (Last 24 Hours)</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover" id="recentTable">
+                                <thead>
+                                    <tr>
+                                        <th>Time</th>
+                                        <th>Method</th>
+                                        <th>URL</th>
+                                        <th>Employee</th>
+                                        <th>Department</th>
+                                        <th>Status</th>
+                                        <th>Duration</th>
+                                        <th>IP</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="recentTableBody">
+                                    <tr>
+                                        <td colspan="8" class="text-center">Loading...</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- By Employee Tab -->
+            <div class="tab-pane fade" id="by-employee" role="tabpanel">
+                <div class="card mt-3">
+                    <div class="card-header">
+                        <h5><i class="bi bi-person"></i> Search by Employee</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="employeeID" class="form-label">Employee ID:</label>
+                                <input type="text" class="form-control" id="employeeID" placeholder="Enter Employee ID">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">&nbsp;</label>
+                                <button class="btn btn-primary d-block" onclick="searchByEmployee()">
+                                    <i class="bi bi-search"></i> Search
+                                </button>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover" id="employeeTable">
+                                <thead>
+                                    <tr>
+                                        <th>Time</th>
+                                        <th>Method</th>
+                                        <th>URL</th>
+                                        <th>Employee</th>
+                                        <th>Department</th>
+                                        <th>Status</th>
+                                        <th>Duration</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="employeeTableBody">
+                                    <tr>
+                                        <td colspan="7" class="text-center">Enter Employee ID to search</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- By Date Tab -->
+            <div class="tab-pane fade" id="by-date" role="tabpanel">
+                <div class="card mt-3">
+                    <div class="card-header">
+                        <h5><i class="bi bi-calendar"></i> Search by Date Range</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label for="startDate" class="form-label">Start Date:</label>
+                                <input type="datetime-local" class="form-control" id="startDate">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="endDate" class="form-label">End Date:</label>
+                                <input type="datetime-local" class="form-control" id="endDate">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">&nbsp;</label>
+                                <button class="btn btn-primary d-block" onclick="searchByDate()">
+                                    <i class="bi bi-search"></i> Search
+                                </button>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover" id="dateTable">
+                                <thead>
+                                    <tr>
+                                        <th>Time</th>
+                                        <th>Method</th>
+                                        <th>URL</th>
+                                        <th>Employee</th>
+                                        <th>Department</th>
+                                        <th>Status</th>
+                                        <th>Duration</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="dateTableBody">
+                                    <tr>
+                                        <td colspan="7" class="text-center">Select date range to search</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slow Calls Tab -->
+            <div class="tab-pane fade" id="slow-calls" role="tabpanel">
+                <div class="card mt-3">
+                    <div class="card-header">
+                        <h5><i class="bi bi-exclamation-triangle"></i> Slow API Calls</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label for="threshold" class="form-label">Threshold (ms):</label>
+                                <input type="number" class="form-control" id="threshold" value="1000" min="100">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="limit" class="form-label">Limit:</label>
+                                <input type="number" class="form-control" id="limit" value="50" min="1" max="1000">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">&nbsp;</label>
+                                <button class="btn btn-primary d-block" onclick="searchSlowCalls()">
+                                    <i class="bi bi-search"></i> Search
+                                </button>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover" id="slowTable">
+                                <thead>
+                                    <tr>
+                                        <th>Time</th>
+                                        <th>Method</th>
+                                        <th>URL</th>
+                                        <th>Employee</th>
+                                        <th>Department</th>
+                                        <th>Status</th>
+                                        <th>Duration</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="slowTableBody">
+                                    <tr>
+                                        <td colspan="7" class="text-center">Click Search to find slow calls</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Load statistics on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadStatistics();
+            loadRecentCalls();
+        });
+
+        async function loadStatistics() {
+            try {
+                const response = await fetch('/api/logs/statistics');
+                const data = await response.json();
+                
+                if (data.success) {
+                    document.getElementById('totalCalls').textContent = data.data.totalCalls.toLocaleString();
+                    document.getElementById('avgResponseTime').textContent = Math.round(data.data.averageResponseTime) + 'ms';
+                    
+                    // Calculate today's calls
+                    const today = new Date();
+                    const startOfDay = new Date(today.getFullYear(), today.getMonth(), today.getDate()).toISOString();
+                    const endOfDay = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 23, 59, 59).toISOString();
+                    
+                    const todayResponse = await fetch(`/api/logs/by-date?startDate=${startOfDay}&endDate=${endOfDay}`);
+                    const todayData = await todayResponse.json();
+                    document.getElementById('todayCalls').textContent = todayData.success ? todayData.data.length : 0;
+                    
+                    // Count slow calls
+                    const slowResponse = await fetch('/api/logs/slow-calls?threshold=1000&limit=1000');
+                    const slowData = await slowResponse.json();
+                    document.getElementById('slowCalls').textContent = slowData.success ? slowData.data.length : 0;
+                }
+            } catch (error) {
+                console.error('Error loading statistics:', error);
+            }
+        }
+
+        async function loadRecentCalls() {
+            try {
+                const response = await fetch('/api/logs/recent');
+                const data = await response.json();
+                
+                if (data.success) {
+                    displayLogs(data.data, 'recentTableBody');
+                }
+            } catch (error) {
+                console.error('Error loading recent calls:', error);
+            }
+        }
+
+        async function searchByEmployee() {
+            const employeeID = document.getElementById('employeeID').value;
+            if (!employeeID) {
+                alert('Please enter an Employee ID');
+                return;
+            }
+            
+            try {
+                const response = await fetch(`/api/logs/by-employee/${employeeID}`);
+                const data = await response.json();
+                
+                if (data.success) {
+                    displayLogs(data.data, 'employeeTableBody');
+                } else {
+                    document.getElementById('employeeTableBody').innerHTML = '<tr><td colspan="7" class="text-center">No data found</td></tr>';
+                }
+            } catch (error) {
+                console.error('Error searching by employee:', error);
+            }
+        }
+
+        async function searchByDate() {
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+            
+            if (!startDate || !endDate) {
+                alert('Please select both start and end dates');
+                return;
+            }
+            
+            try {
+                const response = await fetch(`/api/logs/by-date?startDate=${startDate}&endDate=${endDate}`);
+                const data = await response.json();
+                
+                if (data.success) {
+                    displayLogs(data.data, 'dateTableBody');
+                } else {
+                    document.getElementById('dateTableBody').innerHTML = '<tr><td colspan="7" class="text-center">No data found</td></tr>';
+                }
+            } catch (error) {
+                console.error('Error searching by date:', error);
+            }
+        }
+
+        async function searchSlowCalls() {
+            const threshold = document.getElementById('threshold').value;
+            const limit = document.getElementById('limit').value;
+            
+            try {
+                const response = await fetch(`/api/logs/slow-calls?threshold=${threshold}&limit=${limit}`);
+                const data = await response.json();
+                
+                if (data.success) {
+                    displayLogs(data.data, 'slowTableBody', true);
+                } else {
+                    document.getElementById('slowTableBody').innerHTML = '<tr><td colspan="7" class="text-center">No data found</td></tr>';
+                }
+            } catch (error) {
+                console.error('Error searching slow calls:', error);
+            }
+        }
+
+        function displayLogs(logs, tableBodyId, highlightSlow = false) {
+            const tbody = document.getElementById(tableBodyId);
+            
+            if (logs.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="8" class="text-center">No data found</td></tr>';
+                return;
+            }
+            
+            tbody.innerHTML = logs.map(log => {
+                const date = new Date(log.timestamp);
+                const timeStr = date.toLocaleString('th-TH');
+                
+                let rowClass = '';
+                if (highlightSlow) {
+                    if (log.duration > 5000) {
+                        rowClass = 'very-slow-call';
+                    } else if (log.duration > 2000) {
+                        rowClass = 'slow-call';
+                    }
+                }
+                
+                let statusClass = '';
+                if (log.statusCode >= 200 && log.statusCode < 300) {
+                    statusClass = 'status-2xx';
+                } else if (log.statusCode >= 400 && log.statusCode < 500) {
+                    statusClass = 'status-4xx';
+                } else if (log.statusCode >= 500) {
+                    statusClass = 'status-5xx';
+                }
+                
+                return `
+                    <tr class="${rowClass}">
+                        <td>${timeStr}</td>
+                        <td><span class="badge bg-secondary">${log.method}</span></td>
+                        <td>${log.url}</td>
+                        <td>${log.headers.fullName || log.headers.employeeID || 'N/A'}</td>
+                        <td>${log.headers.department || 'N/A'}</td>
+                        <td><span class="badge ${statusClass}">${log.statusCode}</span></td>
+                        <td>${log.duration}ms</td>
+                        <td>${log.ip}</td>
+                    </tr>
+                `;
+            }).join('');
+        }
+    </script>
+</body>
+</html> 

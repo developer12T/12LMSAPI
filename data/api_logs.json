@@ -1,0 +1,1558 @@
+[
+  {
+    "timestamp": "2025-07-09T09:38:17.943Z",
+    "requestTime": "2025-07-09T09:38:16.766Z",
+    "responseTime": "2025-07-09T09:38:17.942Z",
+    "duration": 1176,
+    "method": "GET",
+    "url": "/api/report-tms/transport-cost/show-data?shipmentId=2508882&channelId=1&truckId=0",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {
+      "shipmentId": "2508882",
+      "channelId": "1",
+      "truckId": "0"
+    },
+    "body": {},
+    "responseSize": 1469
+  },
+  {
+    "timestamp": "2025-07-09T09:38:26.027Z",
+    "requestTime": "2025-07-09T09:38:26.007Z",
+    "responseTime": "2025-07-09T09:38:26.027Z",
+    "duration": 20,
+    "method": "GET",
+    "url": "/api-dashboard",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {},
+    "query": {},
+    "body": {},
+    "responseSize": 21422
+  },
+  {
+    "timestamp": "2025-07-09T09:38:26.061Z",
+    "requestTime": "2025-07-09T09:38:26.057Z",
+    "responseTime": "2025-07-09T09:38:26.061Z",
+    "duration": 4,
+    "method": "GET",
+    "url": "/api/logs/recent",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {},
+    "query": {},
+    "body": {},
+    "responseSize": 1302
+  },
+  {
+    "timestamp": "2025-07-09T09:39:51.243Z",
+    "requestTime": "2025-07-09T09:39:51.235Z",
+    "responseTime": "2025-07-09T09:39:51.243Z",
+    "duration": 8,
+    "method": "GET",
+    "url": "/api-dashboard",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {},
+    "query": {},
+    "body": {},
+    "responseSize": 21422
+  },
+  {
+    "timestamp": "2025-07-09T09:39:51.263Z",
+    "requestTime": "2025-07-09T09:39:51.261Z",
+    "responseTime": "2025-07-09T09:39:51.263Z",
+    "duration": 2,
+    "method": "GET",
+    "url": "/api/logs/statistics",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {},
+    "query": {},
+    "body": {},
+    "responseSize": 234
+  },
+  {
+    "timestamp": "2025-07-09T09:39:51.273Z",
+    "requestTime": "2025-07-09T09:39:51.270Z",
+    "responseTime": "2025-07-09T09:39:51.273Z",
+    "duration": 3,
+    "method": "GET",
+    "url": "/api/logs/by-date?startDate=2025-07-08T17:00:00.000Z&endDate=2025-07-09T16:59:59.000Z",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {},
+    "query": {
+      "startDate": "2025-07-08T17:00:00.000Z",
+      "endDate": "2025-07-09T16:59:59.000Z"
+    },
+    "body": {},
+    "responseSize": 2550
+  },
+  {
+    "timestamp": "2025-07-09T09:39:51.280Z",
+    "requestTime": "2025-07-09T09:39:51.279Z",
+    "responseTime": "2025-07-09T09:39:51.280Z",
+    "duration": 1,
+    "method": "GET",
+    "url": "/api/logs/slow-calls?threshold=1000&limit=1000",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {},
+    "query": {
+      "threshold": "1000",
+      "limit": "1000"
+    },
+    "body": {},
+    "responseSize": 798
+  },
+  {
+    "timestamp": "2025-07-09T09:59:09.877Z",
+    "requestTime": "2025-07-09T09:59:09.589Z",
+    "responseTime": "2025-07-09T09:59:09.877Z",
+    "duration": 288,
+    "method": "GET",
+    "url": "/api/report-tms/transport-cost",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {},
+    "body": {},
+    "responseSize": 685
+  },
+  {
+    "timestamp": "2025-07-09T10:00:09.009Z",
+    "requestTime": "2025-07-09T10:00:08.407Z",
+    "responseTime": "2025-07-09T10:00:09.009Z",
+    "duration": 602,
+    "method": "GET",
+    "url": "/api/report-tms/transport-cost",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {},
+    "body": {},
+    "responseSize": 685
+  },
+  {
+    "timestamp": "2025-07-09T10:00:43.409Z",
+    "requestTime": "2025-07-09T10:00:43.405Z",
+    "responseTime": "2025-07-09T10:00:43.409Z",
+    "duration": 4,
+    "method": "GET",
+    "url": "/api/logs/statistics",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {},
+    "body": {},
+    "responseSize": 249
+  },
+  {
+    "timestamp": "2025-07-09T10:00:43.423Z",
+    "requestTime": "2025-07-09T10:00:43.421Z",
+    "responseTime": "2025-07-09T10:00:43.423Z",
+    "duration": 2,
+    "method": "GET",
+    "url": "/api/logs/recent",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {},
+    "body": {},
+    "responseSize": 5445
+  },
+  {
+    "timestamp": "2025-07-09T10:00:43.440Z",
+    "requestTime": "2025-07-09T10:00:43.439Z",
+    "responseTime": "2025-07-09T10:00:43.440Z",
+    "duration": 1,
+    "method": "GET",
+    "url": "/api/logs/by-date?startDate=2025-07-08T17:00:00.000Z&endDate=2025-07-09T16:59:59.000Z",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {
+      "startDate": "2025-07-08T17:00:00.000Z",
+      "endDate": "2025-07-09T16:59:59.000Z"
+    },
+    "body": {},
+    "responseSize": 6003
+  },
+  {
+    "timestamp": "2025-07-09T10:00:43.462Z",
+    "requestTime": "2025-07-09T10:00:43.460Z",
+    "responseTime": "2025-07-09T10:00:43.462Z",
+    "duration": 2,
+    "method": "GET",
+    "url": "/api/logs/slow-calls?threshold=1000&limit=1000",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {
+      "threshold": "1000",
+      "limit": "1000"
+    },
+    "body": {},
+    "responseSize": 798
+  },
+  {
+    "timestamp": "2025-07-09T10:00:53.077Z",
+    "requestTime": "2025-07-09T10:00:53.073Z",
+    "responseTime": "2025-07-09T10:00:53.077Z",
+    "duration": 4,
+    "method": "GET",
+    "url": "/api/logs/statistics",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {},
+    "body": {},
+    "responseSize": 252
+  },
+  {
+    "timestamp": "2025-07-09T10:00:53.087Z",
+    "requestTime": "2025-07-09T10:00:53.086Z",
+    "responseTime": "2025-07-09T10:00:53.087Z",
+    "duration": 1,
+    "method": "GET",
+    "url": "/api/logs/recent",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {},
+    "body": {},
+    "responseSize": 8018
+  },
+  {
+    "timestamp": "2025-07-09T10:00:53.101Z",
+    "requestTime": "2025-07-09T10:00:53.100Z",
+    "responseTime": "2025-07-09T10:00:53.101Z",
+    "duration": 1,
+    "method": "GET",
+    "url": "/api/logs/by-date?startDate=2025-07-08T17:00:00.000Z&endDate=2025-07-09T16:59:59.000Z",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {
+      "startDate": "2025-07-08T17:00:00.000Z",
+      "endDate": "2025-07-09T16:59:59.000Z"
+    },
+    "body": {},
+    "responseSize": 8576
+  },
+  {
+    "timestamp": "2025-07-09T10:00:53.115Z",
+    "requestTime": "2025-07-09T10:00:53.113Z",
+    "responseTime": "2025-07-09T10:00:53.115Z",
+    "duration": 2,
+    "method": "GET",
+    "url": "/api/logs/slow-calls?threshold=1000&limit=1000",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {
+      "threshold": "1000",
+      "limit": "1000"
+    },
+    "body": {},
+    "responseSize": 798
+  },
+  {
+    "timestamp": "2025-07-09T10:01:11.945Z",
+    "requestTime": "2025-07-09T10:01:11.751Z",
+    "responseTime": "2025-07-09T10:01:11.945Z",
+    "duration": 194,
+    "method": "GET",
+    "url": "/api/report-tms/transport-cost",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {},
+    "body": {},
+    "responseSize": 685
+  },
+  {
+    "timestamp": "2025-07-09T10:01:16.969Z",
+    "requestTime": "2025-07-09T10:01:16.693Z",
+    "responseTime": "2025-07-09T10:01:16.969Z",
+    "duration": 276,
+    "method": "GET",
+    "url": "/api/transport/cost/warehouses",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {},
+    "body": {},
+    "responseSize": 1340
+  },
+  {
+    "timestamp": "2025-07-09T10:01:26.980Z",
+    "requestTime": "2025-07-09T10:01:26.908Z",
+    "responseTime": "2025-07-09T10:01:26.980Z",
+    "duration": 72,
+    "method": "GET",
+    "url": "/api/report-tms/nobill-wh",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {},
+    "query": {},
+    "body": {},
+    "responseSize": 657
+  },
+  {
+    "timestamp": "2025-07-09T10:01:27.017Z",
+    "requestTime": "2025-07-09T10:01:26.984Z",
+    "responseTime": "2025-07-09T10:01:27.017Z",
+    "duration": 33,
+    "method": "GET",
+    "url": "/api/report-tms/nobill-wh",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {},
+    "body": {},
+    "responseSize": 657
+  },
+  {
+    "timestamp": "2025-07-09T10:01:43.981Z",
+    "requestTime": "2025-07-09T10:01:29.947Z",
+    "responseTime": "2025-07-09T10:01:43.981Z",
+    "duration": 14034,
+    "method": "GET",
+    "url": "/api/report-tms/nobill?warehouse=all&dateStart=20250101&dateEnd=20250704",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {
+      "warehouse": "all",
+      "dateStart": "20250101",
+      "dateEnd": "20250704"
+    },
+    "body": {},
+    "responseSize": 57033
+  },
+  {
+    "timestamp": "2025-07-09T10:01:47.387Z",
+    "requestTime": "2025-07-09T10:01:47.384Z",
+    "responseTime": "2025-07-09T10:01:47.387Z",
+    "duration": 3,
+    "method": "GET",
+    "url": "/api/logs/statistics",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {},
+    "body": {},
+    "responseSize": 253
+  },
+  {
+    "timestamp": "2025-07-09T10:01:47.399Z",
+    "requestTime": "2025-07-09T10:01:47.396Z",
+    "responseTime": "2025-07-09T10:01:47.399Z",
+    "duration": 3,
+    "method": "GET",
+    "url": "/api/logs/recent",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {},
+    "body": {},
+    "responseSize": 13547
+  },
+  {
+    "timestamp": "2025-07-09T10:01:47.416Z",
+    "requestTime": "2025-07-09T10:01:47.414Z",
+    "responseTime": "2025-07-09T10:01:47.416Z",
+    "duration": 2,
+    "method": "GET",
+    "url": "/api/logs/by-date?startDate=2025-07-08T17:00:00.000Z&endDate=2025-07-09T16:59:59.000Z",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {
+      "startDate": "2025-07-08T17:00:00.000Z",
+      "endDate": "2025-07-09T16:59:59.000Z"
+    },
+    "body": {},
+    "responseSize": 14106
+  },
+  {
+    "timestamp": "2025-07-09T10:01:47.428Z",
+    "requestTime": "2025-07-09T10:01:47.427Z",
+    "responseTime": "2025-07-09T10:01:47.428Z",
+    "duration": 1,
+    "method": "GET",
+    "url": "/api/logs/slow-calls?threshold=1000&limit=1000",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {
+      "threshold": "1000",
+      "limit": "1000"
+    },
+    "body": {},
+    "responseSize": 1519
+  },
+  {
+    "timestamp": "2025-07-09T10:02:07.576Z",
+    "requestTime": "2025-07-09T10:02:07.573Z",
+    "responseTime": "2025-07-09T10:02:07.576Z",
+    "duration": 3,
+    "method": "GET",
+    "url": "/api/logs/by-employee/68213",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {},
+    "body": {},
+    "responseSize": 12237
+  },
+  {
+    "timestamp": "2025-07-09T10:02:20.745Z",
+    "requestTime": "2025-07-09T10:02:20.741Z",
+    "responseTime": "2025-07-09T10:02:20.745Z",
+    "duration": 4,
+    "method": "GET",
+    "url": "/api/logs/by-date?startDate=2025-07-09T17:02&endDate=2025-07-09T17:02",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {
+      "startDate": "2025-07-09T17:02",
+      "endDate": "2025-07-09T17:02"
+    },
+    "body": {},
+    "responseSize": 114
+  },
+  {
+    "timestamp": "2025-07-09T10:02:29.082Z",
+    "requestTime": "2025-07-09T10:02:29.079Z",
+    "responseTime": "2025-07-09T10:02:29.082Z",
+    "duration": 3,
+    "method": "GET",
+    "url": "/api/logs/by-date?startDate=2025-07-09T17:01&endDate=2025-07-09T17:02",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {
+      "startDate": "2025-07-09T17:01",
+      "endDate": "2025-07-09T17:02"
+    },
+    "body": {},
+    "responseSize": 5645
+  },
+  {
+    "timestamp": "2025-07-09T10:03:46.945Z",
+    "requestTime": "2025-07-09T10:03:46.229Z",
+    "responseTime": "2025-07-09T10:03:46.945Z",
+    "duration": 716,
+    "method": "GET",
+    "url": "/api/user",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {},
+    "body": {},
+    "responseSize": 387708
+  },
+  {
+    "timestamp": "2025-07-09T10:03:50.071Z",
+    "requestTime": "2025-07-09T10:03:50.068Z",
+    "responseTime": "2025-07-09T10:03:50.071Z",
+    "duration": 3,
+    "method": "GET",
+    "url": "/api/logs/statistics",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {},
+    "body": {},
+    "responseSize": 253
+  },
+  {
+    "timestamp": "2025-07-09T10:03:50.083Z",
+    "requestTime": "2025-07-09T10:03:50.082Z",
+    "responseTime": "2025-07-09T10:03:50.083Z",
+    "duration": 1,
+    "method": "GET",
+    "url": "/api/logs/recent",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {},
+    "body": {},
+    "responseSize": 18719
+  },
+  {
+    "timestamp": "2025-07-09T10:03:50.099Z",
+    "requestTime": "2025-07-09T10:03:50.098Z",
+    "responseTime": "2025-07-09T10:03:50.099Z",
+    "duration": 1,
+    "method": "GET",
+    "url": "/api/logs/by-date?startDate=2025-07-08T17:00:00.000Z&endDate=2025-07-09T16:59:59.000Z",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {
+      "startDate": "2025-07-08T17:00:00.000Z",
+      "endDate": "2025-07-09T16:59:59.000Z"
+    },
+    "body": {},
+    "responseSize": 19278
+  },
+  {
+    "timestamp": "2025-07-09T10:03:50.113Z",
+    "requestTime": "2025-07-09T10:03:50.112Z",
+    "responseTime": "2025-07-09T10:03:50.113Z",
+    "duration": 1,
+    "method": "GET",
+    "url": "/api/logs/slow-calls?threshold=1000&limit=1000",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {
+      "threshold": "1000",
+      "limit": "1000"
+    },
+    "body": {},
+    "responseSize": 1519
+  },
+  {
+    "timestamp": "2025-07-09T10:03:59.183Z",
+    "requestTime": "2025-07-09T10:03:59.179Z",
+    "responseTime": "2025-07-09T10:03:59.183Z",
+    "duration": 4,
+    "method": "GET",
+    "url": "/api/logs/statistics",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {},
+    "body": {},
+    "responseSize": 253
+  },
+  {
+    "timestamp": "2025-07-09T10:03:59.195Z",
+    "requestTime": "2025-07-09T10:03:59.192Z",
+    "responseTime": "2025-07-09T10:03:59.195Z",
+    "duration": 3,
+    "method": "GET",
+    "url": "/api/logs/recent",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {},
+    "body": {},
+    "responseSize": 21295
+  },
+  {
+    "timestamp": "2025-07-09T10:03:59.212Z",
+    "requestTime": "2025-07-09T10:03:59.211Z",
+    "responseTime": "2025-07-09T10:03:59.212Z",
+    "duration": 1,
+    "method": "GET",
+    "url": "/api/logs/by-date?startDate=2025-07-08T17:00:00.000Z&endDate=2025-07-09T16:59:59.000Z",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {
+      "startDate": "2025-07-08T17:00:00.000Z",
+      "endDate": "2025-07-09T16:59:59.000Z"
+    },
+    "body": {},
+    "responseSize": 21854
+  },
+  {
+    "timestamp": "2025-07-09T10:03:59.234Z",
+    "requestTime": "2025-07-09T10:03:59.232Z",
+    "responseTime": "2025-07-09T10:03:59.234Z",
+    "duration": 2,
+    "method": "GET",
+    "url": "/api/logs/slow-calls?threshold=1000&limit=1000",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {
+      "threshold": "1000",
+      "limit": "1000"
+    },
+    "body": {},
+    "responseSize": 1519
+  },
+  {
+    "timestamp": "2025-07-09T10:04:05.698Z",
+    "requestTime": "2025-07-09T10:04:05.694Z",
+    "responseTime": "2025-07-09T10:04:05.698Z",
+    "duration": 4,
+    "method": "GET",
+    "url": "/api/logs/statistics",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {},
+    "body": {},
+    "responseSize": 253
+  },
+  {
+    "timestamp": "2025-07-09T10:04:05.709Z",
+    "requestTime": "2025-07-09T10:04:05.707Z",
+    "responseTime": "2025-07-09T10:04:05.709Z",
+    "duration": 2,
+    "method": "GET",
+    "url": "/api/logs/recent",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {},
+    "body": {},
+    "responseSize": 23871
+  },
+  {
+    "timestamp": "2025-07-09T10:04:05.728Z",
+    "requestTime": "2025-07-09T10:04:05.726Z",
+    "responseTime": "2025-07-09T10:04:05.728Z",
+    "duration": 2,
+    "method": "GET",
+    "url": "/api/logs/by-date?startDate=2025-07-08T17:00:00.000Z&endDate=2025-07-09T16:59:59.000Z",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {
+      "startDate": "2025-07-08T17:00:00.000Z",
+      "endDate": "2025-07-09T16:59:59.000Z"
+    },
+    "body": {},
+    "responseSize": 24430
+  },
+  {
+    "timestamp": "2025-07-09T10:04:05.748Z",
+    "requestTime": "2025-07-09T10:04:05.747Z",
+    "responseTime": "2025-07-09T10:04:05.748Z",
+    "duration": 1,
+    "method": "GET",
+    "url": "/api/logs/slow-calls?threshold=1000&limit=1000",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {
+      "threshold": "1000",
+      "limit": "1000"
+    },
+    "body": {},
+    "responseSize": 1519
+  },
+  {
+    "timestamp": "2025-07-09T10:05:13.814Z",
+    "requestTime": "2025-07-09T10:05:13.809Z",
+    "responseTime": "2025-07-09T10:05:13.814Z",
+    "duration": 5,
+    "method": "GET",
+    "url": "/api/logs/statistics",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {},
+    "body": {},
+    "responseSize": 254
+  },
+  {
+    "timestamp": "2025-07-09T10:05:13.844Z",
+    "requestTime": "2025-07-09T10:05:13.841Z",
+    "responseTime": "2025-07-09T10:05:13.843Z",
+    "duration": 2,
+    "method": "GET",
+    "url": "/api/logs/recent",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {},
+    "body": {},
+    "responseSize": 26447
+  },
+  {
+    "timestamp": "2025-07-09T10:05:13.870Z",
+    "requestTime": "2025-07-09T10:05:13.868Z",
+    "responseTime": "2025-07-09T10:05:13.870Z",
+    "duration": 2,
+    "method": "GET",
+    "url": "/api/logs/by-date?startDate=2025-07-08T17:00:00.000Z&endDate=2025-07-09T16:59:59.000Z",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {
+      "startDate": "2025-07-08T17:00:00.000Z",
+      "endDate": "2025-07-09T16:59:59.000Z"
+    },
+    "body": {},
+    "responseSize": 27006
+  },
+  {
+    "timestamp": "2025-07-09T10:05:13.893Z",
+    "requestTime": "2025-07-09T10:05:13.892Z",
+    "responseTime": "2025-07-09T10:05:13.893Z",
+    "duration": 1,
+    "method": "GET",
+    "url": "/api/logs/slow-calls?threshold=1000&limit=1000",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {
+      "threshold": "1000",
+      "limit": "1000"
+    },
+    "body": {},
+    "responseSize": 1519
+  },
+  {
+    "timestamp": "2025-07-09T10:05:42.379Z",
+    "requestTime": "2025-07-09T10:05:42.375Z",
+    "responseTime": "2025-07-09T10:05:42.379Z",
+    "duration": 4,
+    "method": "GET",
+    "url": "/api/logs/statistics",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {},
+    "body": {},
+    "responseSize": 253
+  },
+  {
+    "timestamp": "2025-07-09T10:05:42.389Z",
+    "requestTime": "2025-07-09T10:05:42.387Z",
+    "responseTime": "2025-07-09T10:05:42.389Z",
+    "duration": 2,
+    "method": "GET",
+    "url": "/api/logs/recent",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {},
+    "body": {},
+    "responseSize": 29023
+  },
+  {
+    "timestamp": "2025-07-09T10:05:42.411Z",
+    "requestTime": "2025-07-09T10:05:42.410Z",
+    "responseTime": "2025-07-09T10:05:42.411Z",
+    "duration": 1,
+    "method": "GET",
+    "url": "/api/logs/by-date?startDate=2025-07-08T17:00:00.000Z&endDate=2025-07-09T16:59:59.000Z",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {
+      "startDate": "2025-07-08T17:00:00.000Z",
+      "endDate": "2025-07-09T16:59:59.000Z"
+    },
+    "body": {},
+    "responseSize": 29582
+  },
+  {
+    "timestamp": "2025-07-09T10:05:42.440Z",
+    "requestTime": "2025-07-09T10:05:42.438Z",
+    "responseTime": "2025-07-09T10:05:42.440Z",
+    "duration": 2,
+    "method": "GET",
+    "url": "/api/logs/slow-calls?threshold=1000&limit=1000",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {
+      "threshold": "1000",
+      "limit": "1000"
+    },
+    "body": {},
+    "responseSize": 1519
+  },
+  {
+    "timestamp": "2025-07-09T10:05:55.379Z",
+    "requestTime": "2025-07-09T10:05:55.376Z",
+    "responseTime": "2025-07-09T10:05:55.379Z",
+    "duration": 3,
+    "method": "GET",
+    "url": "/api/logs/by-employee/68213",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {},
+    "body": {},
+    "responseSize": 27713
+  },
+  {
+    "timestamp": "2025-07-09T10:08:30.726Z",
+    "requestTime": "2025-07-09T10:08:30.543Z",
+    "responseTime": "2025-07-09T10:08:30.726Z",
+    "duration": 183,
+    "method": "GET",
+    "url": "/api/report-tms/transport-cost",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {},
+    "body": {},
+    "responseSize": 685
+  },
+  {
+    "timestamp": "2025-07-09T10:08:33.746Z",
+    "requestTime": "2025-07-09T10:08:33.682Z",
+    "responseTime": "2025-07-09T10:08:33.746Z",
+    "duration": 64,
+    "method": "GET",
+    "url": "/api/transport",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {},
+    "body": {},
+    "responseSize": 657
+  },
+  {
+    "timestamp": "2025-07-09T10:08:59.186Z",
+    "requestTime": "2025-07-09T10:08:59.053Z",
+    "responseTime": "2025-07-09T10:08:59.186Z",
+    "duration": 133,
+    "method": "GET",
+    "url": "/api/transport/cost/warehouses",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {},
+    "body": {},
+    "responseSize": 1340
+  },
+  {
+    "timestamp": "2025-07-09T10:08:59.253Z",
+    "requestTime": "2025-07-09T10:08:59.220Z",
+    "responseTime": "2025-07-09T10:08:59.253Z",
+    "duration": 33,
+    "method": "POST",
+    "url": "/api/transport/cost/routes",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {},
+    "body": {
+      "who_no": "105"
+    },
+    "responseSize": 10746
+  },
+  {
+    "timestamp": "2025-07-09T10:09:02.121Z",
+    "requestTime": "2025-07-09T10:09:02.011Z",
+    "responseTime": "2025-07-09T10:09:02.121Z",
+    "duration": 110,
+    "method": "GET",
+    "url": "/api/transport",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {},
+    "body": {},
+    "responseSize": 657
+  },
+  {
+    "timestamp": "2025-07-09T10:14:20.922Z",
+    "requestTime": "2025-07-09T10:14:20.744Z",
+    "responseTime": "2025-07-09T10:14:20.922Z",
+    "duration": 178,
+    "method": "GET",
+    "url": "/api/transport/backlog?wh=102&status=ALL",
+    "statusCode": 200,
+    "userAgent": "PostmanRuntime/7.44.1",
+    "ip": "::ffff:127.0.0.1",
+    "headers": {},
+    "query": {
+      "wh": "102",
+      "status": "ALL"
+    },
+    "body": {},
+    "responseSize": 18140
+  },
+  {
+    "timestamp": "2025-07-09T10:15:02.093Z",
+    "requestTime": "2025-07-09T10:15:01.938Z",
+    "responseTime": "2025-07-09T10:15:02.093Z",
+    "duration": 155,
+    "method": "GET",
+    "url": "/transport/backlog?wh=102&status=ALL",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {
+      "wh": "102",
+      "status": "ALL"
+    },
+    "body": {},
+    "responseSize": 18140
+  },
+  {
+    "timestamp": "2025-07-09T10:15:02.123Z",
+    "requestTime": "2025-07-09T10:15:02.095Z",
+    "responseTime": "2025-07-09T10:15:02.123Z",
+    "duration": 28,
+    "method": "GET",
+    "url": "/api/transport",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {},
+    "body": {},
+    "responseSize": 657
+  },
+  {
+    "timestamp": "2025-07-09T10:15:02.129Z",
+    "requestTime": "2025-07-09T10:15:02.100Z",
+    "responseTime": "2025-07-09T10:15:02.129Z",
+    "duration": 29,
+    "method": "GET",
+    "url": "/transport/reasons",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {},
+    "body": {},
+    "responseSize": 903
+  },
+  {
+    "timestamp": "2025-07-09T10:15:02.242Z",
+    "requestTime": "2025-07-09T10:15:02.105Z",
+    "responseTime": "2025-07-09T10:15:02.242Z",
+    "duration": 137,
+    "method": "GET",
+    "url": "/transport/backlog?wh=102&status=ALL",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {
+      "wh": "102",
+      "status": "ALL"
+    },
+    "body": {},
+    "responseSize": 18140
+  },
+  {
+    "timestamp": "2025-07-09T10:15:07.451Z",
+    "requestTime": "2025-07-09T10:15:07.304Z",
+    "responseTime": "2025-07-09T10:15:07.451Z",
+    "duration": 147,
+    "method": "GET",
+    "url": "/transport/backlog?wh=102&status=ALL",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {
+      "wh": "102",
+      "status": "ALL"
+    },
+    "body": {},
+    "responseSize": 18140
+  },
+  {
+    "timestamp": "2025-07-09T10:15:10.573Z",
+    "requestTime": "2025-07-09T10:15:10.433Z",
+    "responseTime": "2025-07-09T10:15:10.573Z",
+    "duration": 140,
+    "method": "GET",
+    "url": "/transport/backlog?wh=102&status=ALL",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {
+      "wh": "102",
+      "status": "ALL"
+    },
+    "body": {},
+    "responseSize": 18140
+  },
+  {
+    "timestamp": "2025-07-09T10:15:13.720Z",
+    "requestTime": "2025-07-09T10:15:13.717Z",
+    "responseTime": "2025-07-09T10:15:13.720Z",
+    "duration": 3,
+    "method": "GET",
+    "url": "/api/logs/statistics",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {},
+    "body": {},
+    "responseSize": 264
+  },
+  {
+    "timestamp": "2025-07-09T10:15:13.738Z",
+    "requestTime": "2025-07-09T10:15:13.737Z",
+    "responseTime": "2025-07-09T10:15:13.738Z",
+    "duration": 1,
+    "method": "GET",
+    "url": "/api/logs/recent",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {},
+    "body": {},
+    "responseSize": 39346
+  },
+  {
+    "timestamp": "2025-07-09T10:15:13.764Z",
+    "requestTime": "2025-07-09T10:15:13.763Z",
+    "responseTime": "2025-07-09T10:15:13.764Z",
+    "duration": 1,
+    "method": "GET",
+    "url": "/api/logs/by-date?startDate=2025-07-08T17:00:00.000Z&endDate=2025-07-09T16:59:59.000Z",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {
+      "startDate": "2025-07-08T17:00:00.000Z",
+      "endDate": "2025-07-09T16:59:59.000Z"
+    },
+    "body": {},
+    "responseSize": 39905
+  },
+  {
+    "timestamp": "2025-07-09T10:15:13.793Z",
+    "requestTime": "2025-07-09T10:15:13.791Z",
+    "responseTime": "2025-07-09T10:15:13.793Z",
+    "duration": 2,
+    "method": "GET",
+    "url": "/api/logs/slow-calls?threshold=1000&limit=1000",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {
+      "threshold": "1000",
+      "limit": "1000"
+    },
+    "body": {},
+    "responseSize": 1519
+  },
+  {
+    "timestamp": "2025-07-09T10:17:36.087Z",
+    "requestTime": "2025-07-09T10:17:35.867Z",
+    "responseTime": "2025-07-09T10:17:36.087Z",
+    "duration": 220,
+    "method": "GET",
+    "url": "/api/transport/backlog?wh=102&status=ALL",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {
+      "wh": "102",
+      "status": "ALL"
+    },
+    "body": {},
+    "responseSize": 18140
+  },
+  {
+    "timestamp": "2025-07-09T10:18:43.420Z",
+    "requestTime": "2025-07-09T10:18:43.276Z",
+    "responseTime": "2025-07-09T10:18:43.420Z",
+    "duration": 144,
+    "method": "GET",
+    "url": "/api/report-tms/nobill-wh",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {},
+    "query": {},
+    "body": {},
+    "responseSize": 657
+  },
+  {
+    "timestamp": "2025-07-09T10:18:43.455Z",
+    "requestTime": "2025-07-09T10:18:43.422Z",
+    "responseTime": "2025-07-09T10:18:43.455Z",
+    "duration": 33,
+    "method": "GET",
+    "url": "/api/report-tms/nobill-wh",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {},
+    "body": {},
+    "responseSize": 657
+  },
+  {
+    "timestamp": "2025-07-09T10:19:18.859Z",
+    "requestTime": "2025-07-09T10:19:18.662Z",
+    "responseTime": "2025-07-09T10:19:18.859Z",
+    "duration": 197,
+    "method": "GET",
+    "url": "/api/report-tms/transport-cost",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {},
+    "body": {},
+    "responseSize": 685
+  },
+  {
+    "timestamp": "2025-07-09T10:19:23.228Z",
+    "requestTime": "2025-07-09T10:19:22.276Z",
+    "responseTime": "2025-07-09T10:19:23.228Z",
+    "duration": 952,
+    "method": "GET",
+    "url": "/api/report-tms/transport-cost/show-data?shipmentId=2508882&channelId=1&truckId=0",
+    "statusCode": 200,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "ip": "::ffff:127.0.0.1",
+    "headers": {
+      "employeeID": "68213",
+      "fullName": "Woraphat Srisawat",
+      "fullNameThai": "",
+      "department": "Information Technology Department",
+      "position": "Programmer"
+    },
+    "query": {
+      "shipmentId": "2508882",
+      "channelId": "1",
+      "truckId": "0"
+    },
+    "body": {},
+    "responseSize": 1469
+  }
+]
