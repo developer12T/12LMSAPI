@@ -60,7 +60,7 @@ class ApiLogger {
                     position: req.get('position')
                 },
                 query: req.query,
-                body: req.body,
+                body: {},
                 responseSize: data ? JSON.stringify(data).length : 0
             };
 

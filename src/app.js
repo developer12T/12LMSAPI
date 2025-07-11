@@ -109,7 +109,7 @@ io.on('connection', (socket) => {
 });
 
 // Database connection and server start
-const PORT = process.env.PORT || 8006;
+const PORT = process.env.PORT || 8008;
 
 async function startServer() {
     try {
