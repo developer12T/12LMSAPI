@@ -24,6 +24,76 @@ class ApiLogger {
         }
     }
 
+    sanitizeBody(body) {
+        if (!body || typeof body !== 'object') {
+            return body || {};
+        }
+
+        // Create a copy to avoid modifying original
+        const sanitized = { ...body };
+
+        // Mask sensitive fields
+        if (sanitized.password) {
+            sanitized.password = '***MASKED***';
+        }
+        if (sanitized.token) {
+            sanitized.token = '***MASKED***';
+        }
+        if (sanitized.apiKey) {
+            sanitized.apiKey = '***MASKED***';
+        }
+
+        return sanitized;
+    }
+
+    processHeaders(req, body) {
+        // ถ้าเป็น login request
+        if (req.originalUrl === '/api/auth/login') {
+            // ถ้ามี body data
+            if (body && body.username && body.password) {
+                return {
+                    employeeID: req.get('employeeID') || '',
+                    fullName: `username: ${body.username} password: ***MASKED***`,
+                    fullNameThai: req.get('fullNameThai') || '',
+                    department: req.get('department') || '',
+                    position: req.get('position') || '',
+                    clientIP: req.get('clientIP'),
+                    deviceName: req.get('deviceName'),
+                    operatingSystem: req.get('operatingSystem'),
+                    websiteResolution: req.get('websiteResolution'),
+                    displayResolution: req.get('displayResolution')
+                };
+            }
+            // ถ้าไม่มี body data (log เก่า) ให้ใส่ placeholder
+            return {
+                employeeID: req.get('employeeID') || '',
+                fullName: 'login_attempt',
+                fullNameThai: req.get('fullNameThai') || '',
+                department: req.get('department') || '',
+                position: req.get('position') || '',
+                clientIP: req.get('clientIP'),
+                deviceName: req.get('deviceName'),
+                operatingSystem: req.get('operatingSystem'),
+                websiteResolution: req.get('websiteResolution'),
+                displayResolution: req.get('displayResolution')
+            };
+        }
+
+        // สำหรับ request อื่นๆ ใช้แบบเดิม
+        return {
+            employeeID: req.get('employeeID'),
+            fullName: req.get('fullName'),
+            fullNameThai: req.get('fullNameThai'),
+            department: req.get('department'),
+            position: req.get('position'),
+            clientIP: req.get('clientIP'),
+            deviceName: req.get('deviceName'),
+            operatingSystem: req.get('operatingSystem'),
+            websiteResolution: req.get('websiteResolution'),
+            displayResolution: req.get('displayResolution')
+        };
+    }
+
     async logApiCall(req, res, next) {
         // Skip logging for API logs endpoints to prevent recursive logging
         if (req.originalUrl.startsWith('/api/logs') || req.originalUrl.startsWith('/logs')) {
@@ -52,15 +122,9 @@ class ApiLogger {
                 statusCode: res.statusCode,
                 userAgent: req.get('User-Agent'),
                 ip: req.ip || req.connection.remoteAddress,
-                headers: {
-                    employeeID: req.get('employeeID'),
-                    fullName: req.get('fullName'),
-                    fullNameThai: req.get('fullNameThai'),
-                    department: req.get('department'),
-                    position: req.get('position')
-                },
+                headers: apiLogger.processHeaders(req, req.body),
                 query: req.query,
-                body: {},
+                body: apiLogger.sanitizeBody(req.body),
                 responseSize: data ? JSON.stringify(data).length : 0
             };
 

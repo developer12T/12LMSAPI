@@ -1,0 +1,13 @@
+{
+  "watch": ["src"],
+  "ignore": [
+    "data/*",
+    "data/api_logs.json",
+    "*.log",
+    "node_modules/*"
+  ],
+  "ext": "js,json,ejs",
+  "env": {
+    "NODE_ENV": "development"
+  }
+} 
