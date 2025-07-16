@@ -20,6 +20,8 @@ const logsRoutes = require('./routes/logs');
 const cacheRoutes = require('./routes/cache');
 const userRoutes = require('./routes/user');
 const apiLogsRoutes = require('./routes/apiLogs');
+const warehouseRoutes = require('./routes/warehouse');
+const menuRoutes = require('./routes/menu');
 
 const app = express();
 const httpServer = createServer(app);
@@ -75,6 +77,8 @@ app.use('/api/auth', authRoutes);
 app.use('/api/inventory', inventoryRoutes);
 app.use('/api/transport', transportRoutes);
 app.use('/api/report-tms', reportTmsRoutes);
+app.use('/api/warehouse', warehouseRoutes);
+app.use('/api/menu', menuRoutes);
 app.use('/api/cache', cacheRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/logs', apiLogsRoutes);
