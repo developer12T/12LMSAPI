@@ -10,7 +10,10 @@ const {
   getNoBillSummaryData,
   getTransportCostDataOption,
   getTransportCostShowData,
-  getWharehouse
+  getWharehouse,
+  getPlanningAllData,
+  getPlanningAllDataShowPnaDc,
+  getProductImportPlanData
 } = require('../controllers/reportTmsController');
 const {
   formatErrorResponse,
@@ -266,6 +269,76 @@ router.post('/transport-cost/show-data', createRouteHandler(getTransportCostShow
     p5: params.p5 || '',
     p6: params.p6 || '',
     p7: params.p7 || ''
+  })
+}));
+
+// ============================================================================
+// PLANNING ALL ENDPOINTS
+// ============================================================================
+
+// GET /api/report-tms/planning-all - Get planning all data with query parameters
+router.get('/planning-all', createRouteHandler(getPlanningAllData, {
+  stringParams: ['hcase', 'p1', 'p2', 'p3', 'p4', 'p5', 'p6'],
+  extractMetadata: (params) => ({
+    hcase: params.hcase || 'show_data_pna',
+    p1: params.p1 || '',
+    p2: params.p2 || '',
+    p3: params.p3 || '',
+    p4: params.p4 || '',
+    p5: params.p5 || '',
+    p6: params.p6 || ''
+  })
+}));
+
+// POST /api/report-tms/planning-all - Get planning all data with body parameters
+router.post('/planning-all', createRouteHandler(getPlanningAllData, {
+  stringParams: ['hcase', 'p1', 'p2', 'p3', 'p4', 'p5', 'p6'],
+  extractMetadata: (params) => ({
+    hcase: params.hcase || 'show_data_pna',
+    p1: params.p1 || '',
+    p2: params.p2 || '',
+    p3: params.p3 || '',
+    p4: params.p4 || '',
+    p5: params.p5 || '',
+    p6: params.p6 || ''
+  })
+}));
+
+// GET /api/report-tms/planning-all/show-pna-dc - Get planning all data with query parameters for show_pna_dc
+router.get('/planning-all/show-pna-dc', createRouteHandler(getPlanningAllDataShowPnaDc, {
+  stringParams: ['hcase', 'p1', 'p2', 'p3', 'p4', 'p5'],
+  extractMetadata: (params) => ({
+    hcase: params.hcase || 'show_pna_dc',
+    p1: params.p1 || '105',
+    p2: params.p2 || '',
+    p3: params.p3 || '',
+    p4: params.p4 || '',
+    p5: params.p5 || ''
+  })
+}));
+
+// POST /api/report-tms/planning-all/show-pna-dc - Get planning all data with body parameters for show_pna_dc
+router.post('/planning-all/show-pna-dc', createRouteHandler(getPlanningAllDataShowPnaDc, {
+  stringParams: ['hcase', 'p1', 'p2', 'p3', 'p4', 'p5'],
+  extractMetadata: (params) => ({
+    hcase: params.hcase || 'show_pna_dc',
+    p1: params.p1 || '105',
+    p2: params.p2 || '',
+    p3: params.p3 || '',
+    p4: params.p4 || '',
+    p5: params.p5 || ''
+  })
+}));
+
+// ============================================================================
+// PRODUCT IMPORT PLAN ENDPOINTS
+// ============================================================================
+
+// POST /api/report-tms/product-import-plan - Get product import plan data with stored procedure enrichment
+router.post('/product-import-plan', createRouteHandler(getProductImportPlanData, {
+  requiredParams: ['data'],
+  extractMetadata: (params) => ({
+    dataLength: Array.isArray(params.data) ? params.data.length : 0
   })
 }));
 
