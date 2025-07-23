@@ -16,13 +16,16 @@ const authRoutes = require('./routes/auth');
 const inventoryRoutes = require('./routes/inventory');
 const transportRoutes = require('./routes/transport');
 const reportTmsRoutes = require('./routes/reportTms');
-const logsRoutes = require('./routes/logs');
-const cacheRoutes = require('./routes/cache');
+
+const nobillRoutes = require('./routes/oms/report/notBill');
+const shipmentCostRoutes = require('./routes/oms/report/shipmentCost');
+const planningAllRoutes = require('./routes/oms/report/planningAll');
+ 
 const userRoutes = require('./routes/user');
 const apiLogsRoutes = require('./routes/apiLogs');
 const warehouseRoutes = require('./routes/warehouse');
-const menuRoutes = require('./routes/menu');
-const importProductPlanRoutes = require('./routes/importProductPlan');
+
+const importProductPlanRoutes = require('./routes/pdm/importProductPlan');
 
 const app = express();
 const httpServer = createServer(app);
@@ -30,10 +33,6 @@ const io = new Server(httpServer);
 
 // Setup logger with Socket.IO
 const logger = setupLogger(io);
-
-// View engine setup
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
 
 // Security middleware
 app.use(helmet({
@@ -78,18 +77,17 @@ app.use('/api/auth', authRoutes);
 app.use('/api/inventory', inventoryRoutes);
 app.use('/api/transport', transportRoutes);
 app.use('/api/report-tms', reportTmsRoutes);
+// app.use('/api/report-oms', reportOmsRoutes);
+app.use('/api/report/oms/nobill', nobillRoutes);
+app.use('/api/report/oms/shipment-cost', shipmentCostRoutes);
 app.use('/api/warehouse', warehouseRoutes);
-app.use('/api/menu', menuRoutes);
+app.use('/api/report/oms/planning-all', planningAllRoutes);
+
 app.use('/api/import-product-plan', importProductPlanRoutes);
-app.use('/api/cache', cacheRoutes);
+
 app.use('/api/user', userRoutes);
 app.use('/api/logs', apiLogsRoutes);
-app.use('/logs', logsRoutes);
 
-// API Logs Dashboard
-app.get('/api-dashboard', (req, res) => {
-    res.render('apiLogs');
-});
 
 // Health check endpoint
 app.get('/health', (req, res) => {

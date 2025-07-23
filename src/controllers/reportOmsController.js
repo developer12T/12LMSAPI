@@ -188,26 +188,6 @@ const getWharehouse = async (params) => {
   });
 };
 
-/**
- * Get no bill summary data
- */
-const getNoBillSummaryData = async (params) => {
-  const {
-    hcase = 'getsummary_nobill',
-    warehouse = '',
-    dateStart = '',
-    dateEnd = ''
-  } = params;
-
-  logger.info('Executing page_nobill for summary data', { hcase, warehouse, dateStart, dateEnd });
-
-  return await exec('page_nobill', {
-    hcase,
-    p1: warehouse,
-    p2: dateStart,
-    p3: dateEnd
-  });
-};
 
 /**
  * Get transport cost data (รวม 2 stored procedures)
@@ -490,7 +470,7 @@ const getPlanningAllDataShowPnaDc = async (params) => {
         const tco = oco + pco + cco
 
         // Calculate balance: tco - stock
-        const balance = parseFloat(tco) - parseFloat(stock);
+        const balance = parseFloat(stock) - parseFloat(tco) ;
 
         // Verify tco calculation: tco = oco + pco + cco
         // const calculatedTco = oco + pco + cco;
@@ -498,7 +478,7 @@ const getPlanningAllDataShowPnaDc = async (params) => {
 
         logger.info('Processing item with balance calculation:', {
           item_no: item.item_no,
-          tco:  + 200,
+          tco: tco,
           oco: oco,
           pco: pco,
           cco: cco,
@@ -620,7 +600,6 @@ module.exports = {
   getDailyStockHeadData,
   getDailyStockLineData,
   getNoBillData,
-  getNoBillSummaryData,
   getWharehouse,
   getTransportCostDataOption,
   getTransportCostShowData,

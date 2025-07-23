@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const { setupLogger } = require('../utils/logger');
+const { setupLogger } = require('../../utils/logger');
 const { 
   processImportProductPlan,
   getProductDataBySelectPrd
-} = require('../controllers/importProductPlanController');
+} = require('../../controllers/importProductPlanController');
 
 const logger = setupLogger();
 
@@ -125,53 +125,6 @@ router.get('/select-prd', async (req, res) => {
 
   } catch (error) {
     logger.error('Error in select product route:', error);
-    res.status(500).json({
-      success: false,
-      error: 'Failed to retrieve product data',
-      message: process.env.NODE_ENV === 'development' ? error.message : undefined
-    });
-  }
-});
-
-/**
- * POST /api/import-product-plan/select-prd
- * Get product data by calling page_Import_Prd_plan with SELECT_PRD (POST method)
- */
-router.post('/select-prd', async (req, res) => {
-  try {
-    const { product_id } = req.body;
-
-    // ตรวจสอบข้อมูลที่จำเป็น
-    if (!product_id) {
-      return res.status(400).json({
-        success: false,
-        error: 'Missing required field',
-        message: 'product_id is required'
-      });
-    }
-
-    logger.info('Processing select product request (POST):', {
-      product_id
-    });
-
-    // เรียก function เพื่อดึงข้อมูล
-    const result = await getProductDataBySelectPrd({
-      product_id
-    });
-
-    logger.info('Select product completed successfully (POST):', {
-      product_id,
-      resultCount: Array.isArray(result) ? result.length : 'N/A'
-    });
-
-    res.status(200).json({
-      success: true,
-      data: result,
-      message: 'Product data retrieved successfully'
-    });
-
-  } catch (error) {
-    logger.error('Error in select product route (POST):', error);
     res.status(500).json({
       success: false,
       error: 'Failed to retrieve product data',

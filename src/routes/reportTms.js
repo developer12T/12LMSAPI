@@ -6,27 +6,14 @@ const {
   getDailyStockData,
   getDailyStockHeadData,
   getDailyStockLineData,
-  getNoBillData,
-  getNoBillSummaryData,
   getTransportCostDataOption,
   getTransportCostShowData,
-  getWharehouse,
   getPlanningAllData,
   getPlanningAllDataShowPnaDc,
   getProductImportPlanData
-} = require('../controllers/reportTmsController');
-const {
-  formatErrorResponse,
-  createSuccessResponse,
-  validatePagination
-} = require('../utils/responseFormatter');
+} = require('../controllers/reportOmsController');
+
 const { createRouteHandler } = require('../utils/routeHandler');
-
-const logger = setupLogger();
-
-// Constants for pagination and response
-const DEFAULT_PAGE_SIZE = 10;
-const MAX_PAGE_SIZE = 100;
 
 // Thai timezone configuration
 const THAI_TIMEZONE = 'Asia/Bangkok';
@@ -149,186 +136,12 @@ router.post('/daily-stock/line', createRouteHandler(getDailyStockLineData, {
   })
 }));
 
-// ============================================================================
-// NO BILL ENDPOINTS
-// ============================================================================
-
-// GET /api/report-tms/nobill - Get no bill data with query parameters
-router.get('/nobill', createRouteHandler(getNoBillData, {
-  requiredParams: ['warehouse', 'dateStart', 'dateEnd'],
-  stringParams: ['hcase', 'warehouse', 'dateStart', 'dateEnd'],
-  extractMetadata: (params) => ({
-    hcase: params.hcase || 'getdata_nobill',
-    warehouse: params.warehouse,
-    dateStart: params.dateStart,
-    dateEnd: params.dateEnd
-  })
-}));
-
-router.get('/nobill-wh', createRouteHandler(getWharehouse, {
-  extractMetadata: (params) => ({
-    hcase: params.hcase || 'show_wh',
-    p1: '',
-    p2: '',
-    p3: ''
-  })
-}));
-
-// POST /api/report-tms/nobill - Get no bill data with body parameters
-router.post('/nobill', createRouteHandler(getNoBillData, {
-  requiredParams: ['warehouse', 'dateStart', 'dateEnd'],
-  stringParams: ['hcase', 'warehouse', 'dateStart', 'dateEnd'],
-  extractMetadata: (params) => ({
-    hcase: params.hcase || 'getdata_nobill',
-    warehouse: params.warehouse,
-    dateStart: params.dateStart,
-    dateEnd: params.dateEnd
-  })
-}));
-
-// GET /api/report-tms/nobill/summary - Get no bill summary data with query parameters
-router.get('/nobill/summary', createRouteHandler(getNoBillSummaryData, {
-  requiredParams: ['warehouse', 'dateStart', 'dateEnd'],
-  stringParams: ['hcase', 'warehouse', 'dateStart', 'dateEnd'],
-  extractMetadata: (params) => ({
-    hcase: params.hcase || 'getsummary_nobill',
-    warehouse: params.warehouse,
-    dateStart: params.dateStart,
-    dateEnd: params.dateEnd
-  })
-}));
-
-// POST /api/report-tms/nobill/summary - Get no bill summary data with body parameters
-router.post('/nobill/summary', createRouteHandler(getNoBillSummaryData, {
-  requiredParams: ['warehouse', 'dateStart', 'dateEnd'],
-  stringParams: ['hcase', 'warehouse', 'dateStart', 'dateEnd'],
-  extractMetadata: (params) => ({
-    hcase: params.hcase || 'getsummary_nobill',
-    warehouse: params.warehouse,
-    dateStart: params.dateStart,
-    dateEnd: params.dateEnd
-  })
-}));
-
-// ============================================================================
-// TRANSPORT COST ENDPOINTS
-// ============================================================================
-
-// GET /api/report-tms/transport-cost - Get transport cost data with query parameters
-router.get('/transport-cost', createRouteHandler(getTransportCostDataOption, {
-  stringParams: ['p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7', 'p8'],
-  extractMetadata: (params) => ({
-    p1: params.p1 || '',
-    p2: params.p2 || '',
-    p3: params.p3 || '',
-    p4: params.p4 || '',
-    p5: params.p5 || '',
-    p6: params.p6 || '',
-    p7: params.p7 || '',
-    p8: params.p8 || ''
-  })
-}));
-
-// POST /api/report-tms/transport-cost - Get transport cost data with body parameters
-router.post('/transport-cost', createRouteHandler(getTransportCostDataOption, {
-  stringParams: ['p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7', 'p8'],
-  extractMetadata: (params) => ({
-    p1: params.p1 || '',
-    p2: params.p2 || '',
-    p3: params.p3 || '',
-    p4: params.p4 || '',
-    p5: params.p5 || '',
-    p6: params.p6 || '',
-    p7: params.p7 || '',
-    p8: params.p8 || ''
-  })
-}));
-
-// GET /api/report-tms/transport-cost/show-data - Get transport cost show data with query parameters
-router.get('/transport-cost/show-data', createRouteHandler(getTransportCostShowData, {
-  stringParams: ['shipmentId', 'channelId', 'truckId', 'p4', 'p5', 'p6', 'p7'],
-  extractMetadata: (params) => ({
-    shipmentId: params.shipmentId || '',
-    channelId: params.channelId || '',
-    truckId: params.truckId || '',
-    p4: params.p4 || '',
-    p5: params.p5 || '',
-    p6: params.p6 || '',
-    p7: params.p7 || ''
-  })
-}));
-
-// POST /api/report-tms/transport-cost/show-data - Get transport cost show data with body parameters
-router.post('/transport-cost/show-data', createRouteHandler(getTransportCostShowData, {
-  stringParams: ['shipmentId', 'channelId', 'truckId', 'p4', 'p5', 'p6', 'p7'],
-  extractMetadata: (params) => ({
-    shipmentId: params.shipmentId || '',
-    channelId: params.channelId || '',
-    truckId: params.truckId || '',
-    p4: params.p4 || '',
-    p5: params.p5 || '',
-    p6: params.p6 || '',
-    p7: params.p7 || ''
-  })
-}));
 
 // ============================================================================
 // PLANNING ALL ENDPOINTS
 // ============================================================================
 
-// GET /api/report-tms/planning-all - Get planning all data with query parameters
-router.get('/planning-all', createRouteHandler(getPlanningAllData, {
-  stringParams: ['hcase', 'p1', 'p2', 'p3', 'p4', 'p5', 'p6'],
-  extractMetadata: (params) => ({
-    hcase: params.hcase || 'show_data_pna',
-    p1: params.p1 || '',
-    p2: params.p2 || '',
-    p3: params.p3 || '',
-    p4: params.p4 || '',
-    p5: params.p5 || '',
-    p6: params.p6 || ''
-  })
-}));
 
-// POST /api/report-tms/planning-all - Get planning all data with body parameters
-router.post('/planning-all', createRouteHandler(getPlanningAllData, {
-  stringParams: ['hcase', 'p1', 'p2', 'p3', 'p4', 'p5', 'p6'],
-  extractMetadata: (params) => ({
-    hcase: params.hcase || 'show_data_pna',
-    p1: params.p1 || '',
-    p2: params.p2 || '',
-    p3: params.p3 || '',
-    p4: params.p4 || '',
-    p5: params.p5 || '',
-    p6: params.p6 || ''
-  })
-}));
-
-// GET /api/report-tms/planning-all/show-pna-dc - Get planning all data with query parameters for show_pna_dc
-router.get('/planning-all/show-pna-dc', createRouteHandler(getPlanningAllDataShowPnaDc, {
-  stringParams: ['hcase', 'p1', 'p2', 'p3', 'p4', 'p5'],
-  extractMetadata: (params) => ({
-    hcase: params.hcase || 'show_pna_dc',
-    p1: params.p1 || '105',
-    p2: params.p2 || '',
-    p3: params.p3 || '',
-    p4: params.p4 || '',
-    p5: params.p5 || ''
-  })
-}));
-
-// POST /api/report-tms/planning-all/show-pna-dc - Get planning all data with body parameters for show_pna_dc
-router.post('/planning-all/show-pna-dc', createRouteHandler(getPlanningAllDataShowPnaDc, {
-  stringParams: ['hcase', 'p1', 'p2', 'p3', 'p4', 'p5'],
-  extractMetadata: (params) => ({
-    hcase: params.hcase || 'show_pna_dc',
-    p1: params.p1 || '105',
-    p2: params.p2 || '',
-    p3: params.p3 || '',
-    p4: params.p4 || '',
-    p5: params.p5 || ''
-  })
-}));
 
 // ============================================================================
 // PRODUCT IMPORT PLAN ENDPOINTS
