@@ -595,6 +595,239 @@ const getProductImportPlanData = async (params) => {
   }
 };
 
+/**
+ * Get credit limit data from store procedure
+ */
+const getCreditLimitData = async (params) => {
+  const { hcase = 'CreditLimit', warehouse = '', p2 = '', p3 = '' } = params;
+
+  logger.info('Getting credit limit data', { hcase, warehouse, p2, p3 });
+
+  try {
+    // เรียก stored procedure PAGE_SELECT_TO_OMS
+    const result = await exec('page_creditlimit', {
+      hcase: 'list',
+      p1: warehouse,
+      p2: p2,
+      p3: p3
+    });
+
+    // แปลงข้อมูล list_inv และ list_co จาก string เป็น JSON object และคำนวณ sum/count
+    const processedResult = Array.isArray(result) ? result.map(item => {
+      const processedItem = { ...item };
+      
+      // แปลง list_inv จาก string เป็น JSON object
+      if (item.list_inv && typeof item.list_inv === 'string') {
+        try {
+          processedItem.list_inv = JSON.parse(item.list_inv);
+        } catch (parseError) {
+          logger.warn('Failed to parse list_inv JSON:', {
+            error: parseError.message,
+            list_inv: item.list_inv
+          });
+          processedItem.list_inv = [];
+        }
+      }
+      
+      // แปลง list_co จาก string เป็น JSON object
+      if (item.list_co && typeof item.list_co === 'string') {
+        try {
+          processedItem.list_co = JSON.parse(item.list_co);
+        } catch (parseError) {
+          logger.warn('Failed to parse list_co JSON:', {
+            error: parseError.message,
+            list_co: item.list_co
+          });
+          processedItem.list_co = [];
+        }
+      }
+      
+      // คำนวณ sum_inv และ count_inv จาก list_inv
+      if (Array.isArray(processedItem.list_inv)) {
+        processedItem.count_inv = processedItem.list_inv.length;
+        processedItem.sum_inv = processedItem.list_inv.reduce((sum, inv) => {
+          // ใช้ dio_cal_amount ถ้ามี หรือแปลง dio_amount จาก string เป็น number
+          const amount = inv.dio_cal_amount || parseFloat(inv.dio_amount?.replace(/,/g, '') || 0);
+          return sum + amount;
+        }, 0);
+      } else {
+        processedItem.count_inv = 0;
+        processedItem.sum_inv = 0;
+      }
+      
+      // คำนวณ sum_co และ count_co จาก list_co
+      if (Array.isArray(processedItem.list_co)) {
+        processedItem.count_co = processedItem.list_co.length;
+        processedItem.sum_co = processedItem.list_co.reduce((sum, co) => {
+          // ใช้ dco_cal_amount ถ้ามี หรือแปลง dco_amount จาก string เป็น number
+          const amount = co.dco_cal_amount || parseFloat(co.dco_amount?.replace(/,/g, '') || 0);
+          return sum + amount;
+        }, 0);
+      } else {
+        processedItem.count_co = 0;
+        processedItem.sum_co = 0;
+      }
+      
+      // หาวันที่มากที่สุดใน list_inv.dio_due_date และ list_co.dco_send_date
+      let maxDueDate = null;
+      let maxSendDate = null;
+      
+      // หาวันที่มากที่สุดใน list_inv และคำนวณจำนวนวันสำหรับแต่ละรายการ
+      if (Array.isArray(processedItem.list_inv) && processedItem.list_inv.length > 0) {
+        const dueDates = [];
+        
+        // คำนวณจำนวนวันสำหรับแต่ละรายการใน list_inv
+        processedItem.list_inv = processedItem.list_inv.map(inv => {
+          if (inv.dio_due_date && inv.dio_due_date.length === 8) {
+            const year = parseInt(inv.dio_due_date.substring(0, 4));
+            const month = parseInt(inv.dio_due_date.substring(4, 6));
+            const day = parseInt(inv.dio_due_date.substring(6, 8));
+            
+            // ตรวจสอบว่าวันที่ถูกต้องหรือไม่
+            if (month >= 1 && month <= 12 && day >= 1 && day <= 31) {
+              const dueDate = new Date(year, month - 1, day);
+              
+              // ตรวจสอบว่าวันที่ที่สร้างขึ้นตรงกับข้อมูลเดิมหรือไม่
+              if (dueDate.getFullYear() === year && 
+                  dueDate.getMonth() === month - 1 && 
+                  dueDate.getDate() === day) {
+                
+                const today = new Date();
+                const timeDiff = dueDate.getTime() - today.getTime();
+                const daysDiff = Math.floor(timeDiff / (1000 * 3600 * 24));
+                
+                dueDates.push(dueDate);
+                
+                return {
+                  ...inv,
+                  days_from_today: daysDiff < 0 ? daysDiff : '-'
+                };
+              }
+            }
+            
+            return {
+              ...inv,
+              days_from_today: '-'
+            };
+          } else {
+            return {
+              ...inv,
+              days_from_today: '-'
+            };
+          }
+        });
+        
+        if (dueDates.length > 0) {
+          maxDueDate = new Date(Math.max(...dueDates));
+        }
+      }
+      
+      // หาวันที่มากที่สุดใน list_co และคำนวณจำนวนวันสำหรับแต่ละรายการ
+      if (Array.isArray(processedItem.list_co) && processedItem.list_co.length > 0) {
+        const sendDates = [];
+        
+        // คำนวณจำนวนวันสำหรับแต่ละรายการใน list_co
+        processedItem.list_co = processedItem.list_co.map(co => {
+          if (co.dco_send_date && co.dco_send_date.length === 8) {
+            const year = parseInt(co.dco_send_date.substring(0, 4));
+            const month = parseInt(co.dco_send_date.substring(4, 6));
+            const day = parseInt(co.dco_send_date.substring(6, 8));
+            
+            // ตรวจสอบว่าวันที่ถูกต้องหรือไม่
+            if (month >= 1 && month <= 12 && day >= 1 && day <= 31) {
+              const sendDate = new Date(year, month - 1, day);
+              
+              // ตรวจสอบว่าวันที่ที่สร้างขึ้นตรงกับข้อมูลเดิมหรือไม่
+              if (sendDate.getFullYear() === year && 
+                  sendDate.getMonth() === month - 1 && 
+                  sendDate.getDate() === day) {
+                
+                const today = new Date();
+                const timeDiff = sendDate.getTime() - today.getTime();
+                const daysDiff = Math.floor(timeDiff / (1000 * 3600 * 24));
+                
+                sendDates.push(sendDate);
+                
+                return {
+                  ...co,
+                  days_from_today: daysDiff < 0 ? daysDiff : '-'
+                };
+              }
+            }
+            
+            return {
+              ...co,
+              days_from_today: '-'
+            };
+          } else {
+            return {
+              ...co,
+              days_from_today: '-'
+            };
+          }
+        });
+        
+        if (sendDates.length > 0) {
+          maxSendDate = new Date(Math.max(...sendDates));
+        }
+      }
+      
+      // แยกวันที่มากที่สุดเป็น co_max_send_date และ inv_max_due_date
+      if (maxDueDate) {
+        const today = new Date();
+        const timeDiff = maxDueDate.getTime() - today.getTime();
+        const daysDiff = Math.floor(timeDiff / (1000 * 3600 * 24));
+        
+        processedItem.inv_max_due_date = maxDueDate.toISOString().split('T')[0]; // วันที่มากที่สุดของ invoice ในรูปแบบ YYYY-MM-DD
+        
+        // คำนวณ inv_days_from_today เฉพาะรายการที่มีวันที่น้อยกว่าวันปัจจุบัน
+        const overdueInvoices = processedItem.list_inv.filter(inv => 
+          inv.days_from_today !== null && inv.days_from_today < 0
+        );
+        
+        if (overdueInvoices.length > 0) {
+          // หาจำนวนวันที่น้อยที่สุด (ลบมากที่สุด) ในรายการที่เกินกำหนด
+          const minDays = Math.min(...overdueInvoices.map(inv => inv.days_from_today));
+          processedItem.inv_days_from_today = minDays;
+        } else {
+          processedItem.inv_days_from_today = '-';
+        }
+      } else {
+        processedItem.inv_max_due_date = null;
+        processedItem.inv_days_from_today = null;
+      }
+      
+      if (maxSendDate) {
+        const today = new Date();
+        const timeDiff = maxSendDate.getTime() - today.getTime();
+        const daysDiff = Math.floor(timeDiff / (1000 * 3600 * 24));
+        
+        processedItem.co_max_send_date = maxSendDate.toISOString().split('T')[0]; // วันที่มากที่สุดของ CO ในรูปแบบ YYYY-MM-DD
+        processedItem.co_days_from_today = daysDiff; // จำนวนวันที่ห่างจากวันปัจจุบันสำหรับ CO
+      } else {
+        processedItem.co_max_send_date = null;
+        processedItem.co_days_from_today = null;
+      }
+      
+      return processedItem;
+    }) : [];
+
+    logger.info('Credit limit data retrieved and processed successfully', { 
+      recordCount: processedResult.length 
+    });
+
+    return processedResult;
+
+  } catch (error) {
+    logger.error('Error in getCreditLimitData:', {
+      error: error.message,
+      stack: error.stack,
+      params: { hcase, warehouse, p2, p3 }
+    });
+    throw error;
+  }
+};
+
 module.exports = {
   getDailyStockData,
   getDailyStockHeadData,
@@ -605,5 +838,6 @@ module.exports = {
   getTransportCostShowData,
   getPlanningAllData,
   getPlanningAllDataShowPnaDc,
-  getProductImportPlanData
+  getProductImportPlanData,
+  getCreditLimitData
 }; 

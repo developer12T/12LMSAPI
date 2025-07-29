@@ -20,6 +20,7 @@ const reportTmsRoutes = require('./routes/reportTms');
 const nobillRoutes = require('./routes/oms/report/notBill');
 const shipmentCostRoutes = require('./routes/oms/report/shipmentCost');
 const planningAllRoutes = require('./routes/oms/report/planningAll');
+const creditLimitRoutes = require('./routes/oms/report/creditLimit');
  
 const userRoutes = require('./routes/user');
 const apiLogsRoutes = require('./routes/apiLogs');
@@ -80,6 +81,7 @@ app.use('/api/report-tms', reportTmsRoutes);
 // app.use('/api/report-oms', reportOmsRoutes);
 app.use('/api/report/oms/nobill', nobillRoutes);
 app.use('/api/report/oms/shipment-cost', shipmentCostRoutes);
+app.use('/api/report/oms/credit-limit', creditLimitRoutes);
 app.use('/api/warehouse', warehouseRoutes);
 app.use('/api/report/oms/planning-all', planningAllRoutes);
 
