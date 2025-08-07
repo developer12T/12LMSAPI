@@ -283,6 +283,75 @@ const getTransportCostShowData = async (params) => {
 };
 
 /**
+ * Extract and group brand_item from planning data
+ * @param {Array} data - Planning data array
+ * @returns {Array} Array of unique brand_item values
+ */
+const extractAndGroupBrandItems = (data) => {
+  if (!Array.isArray(data)) {
+    return [];
+  }
+
+  const brandItems = new Set();
+  
+  data.forEach(item => {
+    if (item.brand_item && typeof item.brand_item === 'string' && item.brand_item.trim() !== '') {
+      brandItems.add(item.brand_item.trim());
+    }
+  });
+
+  return Array.from(brandItems).sort();
+};
+
+/**
+ * Extract and group group_item from planning data
+ * @param {Array} data - Planning data array
+ * @returns {Array} Array of unique group_item values
+ */
+const extractAndGroupGroupItems = (data) => {
+  if (!Array.isArray(data)) {
+    return [];
+  }
+
+  const groupItems = new Set();
+  
+  data.forEach(item => {
+    if (item.group_item && typeof item.group_item === 'string' && item.group_item.trim() !== '') {
+      groupItems.add(item.group_item.trim());
+    }
+  });
+
+  return Array.from(groupItems).sort();
+};
+
+/**
+ * Group products by brand and include product data
+ * @param {Array} data - Planning data array
+ * @returns {Object} Object with brand as key and array of products as value
+ */
+const groupProductsByBrand = (data) => {
+  if (!Array.isArray(data)) {
+    return {};
+  }
+
+  const brandGroups = {};
+  
+  data.forEach(item => {
+    if (item.brand_item && typeof item.brand_item === 'string' && item.brand_item.trim() !== '') {
+      const brand = item.brand_item.trim();
+      
+      if (!brandGroups[brand]) {
+        brandGroups[brand] = [];
+      }
+      
+      brandGroups[brand].push(item);
+    }
+  });
+
+  return brandGroups;
+};
+
+/**
  * Get planning all data
  */
 const getPlanningAllData = async (params) => {
@@ -394,6 +463,13 @@ const getPlanningAllData = async (params) => {
     const groupedPlanDates = groupPlanDates(planDatesList);
     const groupedFormattedPlanDates = groupFormattedPlanDates(formattedPlanDatesList);
 
+    // Extract and group brand_item and group_item
+    const brandItems = extractAndGroupBrandItems(finalResult);
+    const groupItems = extractAndGroupGroupItems(finalResult);
+    
+    // Group products by brand and include product data
+    const brandProductGroups = groupProductsByBrand(finalResult);
+
     logger.info('Planning all data enrichment completed', { 
       totalItems: result.length,
       enrichedItems: finalResult.length,
@@ -402,7 +478,10 @@ const getPlanningAllData = async (params) => {
       uniquePlanDatesCount: uniquePlanDatesList.length,
       uniqueFormattedPlanDatesCount: uniqueFormattedPlanDatesList.length,
       groupedPlanDatesCount: Object.keys(groupedPlanDates).length,
-      groupedFormattedPlanDatesCount: Object.keys(groupedFormattedPlanDates).length
+      groupedFormattedPlanDatesCount: Object.keys(groupedFormattedPlanDates).length,
+      brandItemsCount: brandItems.length,
+      groupItemsCount: groupItems.length,
+      brandProductGroupsCount: Object.keys(brandProductGroups).length
     });
 
     return {
@@ -412,7 +491,10 @@ const getPlanningAllData = async (params) => {
       uniquePlanDatesList: uniquePlanDatesList,
       uniqueFormattedPlanDatesList: uniqueFormattedPlanDatesList,
       groupedPlanDates: groupedPlanDates,
-      groupedFormattedPlanDates: groupedFormattedPlanDates
+      groupedFormattedPlanDates: groupedFormattedPlanDates,
+      brandItems: brandItems,
+      groupItems: groupItems,
+      brandProductGroups: brandProductGroups
     };
   } catch (error) {
     logger.error('Error in getPlanningAllData:', {
@@ -503,10 +585,46 @@ const getPlanningAllDataShowPnaDc = async (params) => {
         enrichedItems: enrichedResult.length
       });
 
-      return enrichedResult;
+      // Extract and group brand_item and group_item
+      const brandItems = extractAndGroupBrandItems(enrichedResult);
+      const groupItems = extractAndGroupGroupItems(enrichedResult);
+      
+      // Group products by brand and include product data
+      const brandProductGroups = groupProductsByBrand(enrichedResult);
+
+      logger.info('Extracted brand and group items:', {
+        brandItemsCount: brandItems.length,
+        groupItemsCount: groupItems.length,
+        brandProductGroupsCount: Object.keys(brandProductGroups).length
+      });
+
+      return {
+        data: enrichedResult,
+        brandItems: brandItems,
+        groupItems: groupItems,
+        brandProductGroups: brandProductGroups
+      };
     }
 
-    return result;
+    // Extract and group brand_item and group_item from original result
+    const brandItems = extractAndGroupBrandItems(result);
+    const groupItems = extractAndGroupGroupItems(result);
+    
+    // Group products by brand and include product data
+    const brandProductGroups = groupProductsByBrand(result);
+
+    logger.info('Extracted brand and group items from original result:', {
+      brandItemsCount: brandItems.length,
+      groupItemsCount: groupItems.length,
+      brandProductGroupsCount: Object.keys(brandProductGroups).length
+    });
+
+    return {
+      data: result,
+      brandItems: brandItems,
+      groupItems: groupItems,
+      brandProductGroups: brandProductGroups
+    };
   } catch (error) {
     logger.error('Error in getPlanningAllDataShowPnaDc:', {
       error: error.message,
@@ -828,6 +946,41 @@ const getCreditLimitData = async (params) => {
   }
 };
 
+/**
+ * Get planning all data panel from stored procedure
+ */
+const getPlanningAllGenDataPnl = async (params) => {
+  const { hcase = 'gendatapnl', p1 = '', p2 = '', p3 = '', p4 = '', p5 = '' } = params;
+
+  logger.info('Getting planning all data panel', { hcase, p1, p2, p3, p4, p5 });
+
+  try {
+    // เรียก stored procedure page_Planning_all
+    const result = await exec('page_Planning_all', {
+      hcase: hcase,
+      p1: p1,
+      p2: p2,
+      p3: p3,
+      p4: p4,
+      p5: p5
+    });
+
+    logger.info('Planning all data panel retrieved successfully', { 
+      recordCount: Array.isArray(result) ? result.length : 0 
+    });
+
+    return result || [];
+
+  } catch (error) {
+    logger.error('Error in getPlanningAllGenDataPnl:', {
+      error: error.message,
+      stack: error.stack,
+      params: { hcase, p1, p2, p3, p4, p5 }
+    });
+    throw error;
+  }
+};
+
 module.exports = {
   getDailyStockData,
   getDailyStockHeadData,
@@ -839,5 +992,6 @@ module.exports = {
   getPlanningAllData,
   getPlanningAllDataShowPnaDc,
   getProductImportPlanData,
-  getCreditLimitData
+  getCreditLimitData,
+  getPlanningAllGenDataPnl
 }; 

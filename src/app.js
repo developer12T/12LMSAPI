@@ -21,6 +21,7 @@ const nobillRoutes = require('./routes/oms/report/notBill');
 const shipmentCostRoutes = require('./routes/oms/report/shipmentCost');
 const planningAllRoutes = require('./routes/oms/report/planningAll');
 const creditLimitRoutes = require('./routes/oms/report/creditLimit');
+const backlogRoutes = require('./routes/oms/manage/backlog');
  
 const userRoutes = require('./routes/user');
 const apiLogsRoutes = require('./routes/apiLogs');
@@ -84,6 +85,7 @@ app.use('/api/report/oms/shipment-cost', shipmentCostRoutes);
 app.use('/api/report/oms/credit-limit', creditLimitRoutes);
 app.use('/api/warehouse', warehouseRoutes);
 app.use('/api/report/oms/planning-all', planningAllRoutes);
+app.use('/api/oms/manage/backlog', backlogRoutes);
 
 app.use('/api/import-product-plan', importProductPlanRoutes);
 
