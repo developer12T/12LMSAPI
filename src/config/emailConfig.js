@@ -4,20 +4,20 @@ require('dotenv').config();
 
 const emailConfig = {
     // SMTP Configuration
-    smtp: {
-        host: process.env.SMTP_HOST || 'smtp.office365.com',
-        port: process.env.SMTP_PORT || 587, // Office365 ใช้ port 587 สำหรับ STARTTLS
-        secure: process.env.SMTP_SECURE === 'true', // false สำหรับ STARTTLS, true สำหรับ SSL/TLS
-        auth: {
-            user: process.env.SMTP_USER || 'notification@f-plus.co.th',
-            pass: process.env.SMTP_PASS || '123131asdasd'
-        },
-        // เพิ่มการตั้งค่า TLS สำหรับ Office365
-        tls: {
-            rejectUnauthorized: false,
-            ciphers: 'SSLv3'
-        }
-    },
+    // smtp: {
+    //     host: process.env.SMTP_HOST || 'smtp.office365.com',
+    //     port: process.env.SMTP_PORT || 587, // Office365 ใช้ port 587 สำหรับ STARTTLS
+    //     secure: process.env.SMTP_SECURE === 'false', // false สำหรับ STARTTLS, true สำหรับ SSL/TLS
+    //     auth: {
+    //         user: process.env.SMTP_USER || 'notification@f-plus.co.th',
+    //         pass: process.env.SMTP_PASS || 'trlskhymhqkxpcyl'//'123131asdasd'
+    //     },
+    //     // เพิ่มการตั้งค่า TLS สำหรับ Office365
+    //     tls: {
+    //         rejectUnauthorized: false,
+    //         ciphers: 'SSLv3'
+    //     }
+    // },
     
     // Default sender information
     defaultFrom: {

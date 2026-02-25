@@ -9,7 +9,7 @@ const logger = setupLogger();
 class EmailService {
     constructor() {
         this.transporter = null;
-        this.initializeTransporter();
+        // this.initializeTransporter();
     }
 
     /**
